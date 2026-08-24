@@ -1,0 +1,122 @@
+"use client";
+
+import { useEffect, useRef } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { nav, site } from "@/lib/content";
+import { EASE_OUT } from "@/lib/animations/motion-variants";
+
+interface NavOverlayProps {
+  open: boolean;
+  onClose: () => void;
+}
+
+const FOCUSABLE = 'a[href], button:not([disabled])';
+
+export function NavOverlay({ open, onClose }: NavOverlayProps) {
+  const panelRef = useRef<HTMLDivElement>(null);
+  const firstLinkRef = useRef<HTMLAnchorElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+
+    firstLinkRef.current?.focus();
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+        return;
+      }
+      if (e.key !== "Tab" || !panelRef.current) return;
+
+      const focusable = Array.from(
+        panelRef.current.querySelectorAll<HTMLElement>(FOCUSABLE)
+      );
+      if (focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const active = document.activeElement;
+
+      if (e.shiftKey && active === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && active === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", onKeyDown);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = "";
+    };
+  }, [open, onClose]);
+
+  return (
+    <AnimatePresence>
+      {open && (
+        <motion.div
+          ref={panelRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Site navigation"
+          className="fixed inset-0 z-[var(--z-nav-overlay)] flex flex-col bg-copper text-copper-ink"
+          initial={{ clipPath: "inset(0 0 100% 0)" }}
+          animate={{ clipPath: "inset(0 0 0% 0)" }}
+          exit={{ clipPath: "inset(0 0 100% 0)" }}
+          transition={{ duration: 0.6, ease: EASE_OUT }}
+        >
+          <div className="container-edit flex flex-1 flex-col pt-28 pb-10 sm:pt-32">
+            <nav className="flex flex-1 flex-col justify-center gap-1 sm:gap-2">
+              {nav.map((item, i) => (
+                <motion.div
+                  key={item.href}
+                  initial={{ opacity: 0, y: 24 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.15 + i * 0.05, duration: 0.5, ease: EASE_OUT }}
+                  className="flex items-baseline gap-4 border-b border-copper-ink/15 py-3 sm:py-4"
+                >
+                  <span className="font-mono text-xs text-copper-ink/50">
+                    0{i + 1}
+                  </span>
+                  <a
+                    ref={i === 0 ? firstLinkRef : undefined}
+                    href={item.href}
+                    onClick={onClose}
+                    className="group text-[13vw] leading-[0.95] font-black uppercase tracking-tight transition-colors hover:text-cream sm:text-[6vw]"
+                  >
+                    {item.label}
+                  </a>
+                </motion.div>
+              ))}
+            </nav>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4, duration: 0.5 }}
+              className="mt-10 flex flex-col gap-8 border-t border-copper-ink/15 pt-8 text-sm sm:flex-row sm:items-end sm:justify-between"
+            >
+              <div>
+                <p className="text-xs uppercase tracking-[0.2em] text-copper-ink/60">
+                  Get in touch
+                </p>
+                <a href={site.emailHref} className="mt-1 block font-medium hover:underline">
+                  {site.email}
+                </a>
+                <a href={site.phoneHref} className="mt-1 block font-medium hover:underline">
+                  {site.phone}
+                </a>
+              </div>
+              <p className="text-xs uppercase tracking-[0.2em] text-copper-ink/60">
+                Currently accepting new clients
+              </p>
+            </motion.div>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}

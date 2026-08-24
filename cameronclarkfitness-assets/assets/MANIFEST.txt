@@ -1,0 +1,90 @@
+Cameron Clark Fitness — Website Asset Export
+Source: https://www.cameronclarkfitness.com/  (Webflow site)
+Exported: 2026-08-24
+Pages crawled: 11
+
+FOLDERS
+  images/                     - images as served on the site (AVIF/WebP/SVG/PNG)
+  images/responsive-variants/ - Webflow auto-generated resized copies (-p-500, -p-800, -p-1080)
+  images-originals/           - full-quality source uploads (PNG/JPG) pulled from the CDN
+  logos/                      - press / brand logos
+  icons-favicon/              - favicon, webclip, small icons
+  fonts/google-fonts/         - Open Sans, Noto Sans, Libre Franklin (woff2) + CSS
+  fonts/icon-font/            - webflow-icons.ttf (was base64-embedded in the stylesheet)
+  animations/                 - Lottie animation JSON (logo animation)
+  ui-elements/                - background SVG + UI arrows extracted from base64 CSS
+
+PAGES CRAWLED
+  https://www.cameronclarkfitness.com/about
+  https://www.cameronclarkfitness.com
+  https://www.cameronclarkfitness.com/service/online-coaching-program
+  https://www.cameronclarkfitness.com/contact
+  https://www.cameronclarkfitness.com/service/in-person-training
+  https://www.cameronclarkfitness.com/service
+  https://www.cameronclarkfitness.com/book-a-discovery-call
+  https://www.cameronclarkfitness.com/contact-thank-you
+  https://www.cameronclarkfitness.com/privacy-policy
+  https://www.cameronclarkfitness.com/terms-and-conditions
+  https://www.cameronclarkfitness.com/discovery-call-thank-you
+
+SOURCE URLS
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/687993b9440da6b12adffb19_Webflow%20Background.svg
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/687d8ee0c931d941413794b7_relume-199488.avif
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/687d8ee0c931d941413794b7_relume-199488-p-500.png
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/687d8ee0c931d941413794b7_relume-199488-p-800.png
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/687d980e494b30a9027755cc_Cameron%20Clark%20-%20Banner%20Background.avif
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/687dbcb71d72ea946e4d57b3_Property.svg
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/687dbcb74b266e06a291732c_amazon-logo.svg
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/687dbcb751b4f5a3e36c3560_the-new-daily.svg
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/687dbcb7a9a63f5f98c755fc_9news-logo.svg
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/687dbcb7f50fb698a00364ed_money-logo.svg
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/687dbcb814983117d123e151_The%20Property%20Investor.svg
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/687dc590f288cff6f27fdb66_Cameron%20Clark%20-%20Graphics%20Blue.avif
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/687df6691cda904273980c55_Grunge%20Gray%20Texture.avif
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/687dfad8404867c435faf685_Cameron%20Clark%20-%20Banner%20texture%20Background.avif
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/687e005c33800dda2ee7560b_part%20retro%20car%20close%20up%20beautiful%20style%20transport%20-%20Cameron%20Clark.avif
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/687e12c65ae3133ae858307a_Cameron%20Clark%20-%20Graphics%20Blue%20360.avif
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/687ed7a372944eac647d7400_Cameron-Clark-Frontal-Shot.avif
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/687edf3e3d13331219c5cd0c_Grunge%20Gray%20Texture%20inverted.webp
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/687ee4dbb5fb4845a7b47b10_Cameron%20Clark%20-%20Graphics%20White.avif
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/687ee51d96bcd66758a90fb5_Cameron%20Clark%20-%20Graphics%20White%20inverted.avif
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/687f31d11e02e76e8a899277_thunderbird-close-up-shot.avif
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/687f3b834a65564ec541568b_closeup%20of%20the%20headlights%20and%20front%20bumper.avif
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/68806352c977c7dfb7249c3d_car%20gasoline%20engine%20equipped%20with%20performance%20coni.avif
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/688068da3c318fa8e9fb96cd_group-of-healthy-fit-people-at-the-gym-exercising.avif
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/6880704985f4cf0f22424368_Strength%20Training%20with%20One-Arm%20Dumbbell%20Row%20Exercise.avif
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/688071ea1070affa988e2906_Focused%20Rowing%20Machine%20Workout%20at%20the%20Gym.avif
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/6881863cf4b923387b88eb0b_Cameron%20Clark%20-%20Car%20Silhouette.avif
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/6881b9180afd66460bd0bd48_Cameron%20-%20Intense%20Battle%20Rope%20Workout%20in%20Gym.avif
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/6890684cfe607c654a845cc2_Cameron-Clark---Powerlifter-Deadlifting-at-USPA-National-Championship-with-background.avif
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/6890684cfe607c654a845cc2_Cameron-Clark---Powerlifter-Deadlifting-at-USPA-National-Championship-with-background-p-500.png
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/689072ec24a7dba397f58d54_Cameron-Clark%20-%20-Triumph-Car.avif
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/689074b3001f651be3f06867_Cameron-Clark%20-%20Triumph-Car.avif
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/6892deb1198dfe9aa4d43c3c_Vintage-Car-on-Shade%20-%20-Cameropn-Clark-Fitness.avif
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/6892df4b28418dd946ff8cdf_Cameron%20Clark%20with%20his%20Daughter%20-Cameropn-Clark-Fitness.avif
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/6892e694b4596e0c439641f2_Cameron%20Clark%20-%20Powerlifter%20at%20Patriot%20Strength%20Fest%20in%20New%20Orleans.avif
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/6893025683fd77e1d1b51383_Cameron-Clark%20-%20Triumph-Car.avif
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/68930ad1724035d84b5fb325_Cameron%20Clark%20-%20Benching.avif
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/68930ad1724035d84b5fb325_Cameron%20Clark%20-%20Benching-p-1080.avif
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/68930ad1724035d84b5fb325_Cameron%20Clark%20-%20Benching-p-500.avif
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/68930ad1724035d84b5fb325_Cameron%20Clark%20-%20Benching-p-800.avif
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/689965e21bda74f989d212f8_envato-labs-image-edit%20-%202025-08-11T113828.523.avif
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/689d93f50a0ed5b161fb9540_recommend%20-%20icon.png
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/689d9790db6476927303c79f_Will%20James%20Johnson%20Testimonial%20Profile%20Picture.avif
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/689ec500ad663a5b955323c3_Clean%20Shirt%20edited%20-%20Cameron%20Clark.avif
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/68cca18f052cc2758e7ac016_Cameron%20Clark%20-%20Personal%20Trainer%20Assisting%20Core%20Workout%20with%20Medicine%20Ball.avif
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/68ccab232c7e1d685be13b77_Cameron%20Clark%20-%20Trainer%20Coaching%20Plank%20Form%20During%20Core%20Workout.avif
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/68ccb97552cbf31dded8d9b5_Cameron%20Clark%20%20-%20Trainer%20Spotting%20Client%20During%20Incline%20Dumbbell%20Press.avif
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/68ccd3786f75274a8e210e9f_Cameron%20Clark%20-%20Personal%20Trainer%20Highlighting%20Strength%20Training%20and%20Client%20Support.avif
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/68d08d356961feb9ad80bc4c_Cameron%20Clark%20Fitness%20-%20with%20vintage%20car.avif
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/68d09cea8bf6d88cc10a3dd9_Favicon%20Cameron%20Clark%20Fitness.png
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/68d09d41bd96b42702519bd4_Webclip%20-%20Cameron%20Clark%20Fitness.png
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/68d0c648d55a756fcce034d5_Cameron%20Clark%20with%20his%20Daughter.avif
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/68d0c648d55a756fcce034d5_Cameron%20Clark%20with%20his%20Daughter-p-500.avif
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/68d1024f5810331c26022282_Cameron%20Clark%20-%20Online%20Step%202.avif
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/68d104eaff2bd28007ffe0cb_Cameron%20Clark%20on%20Gym.avif
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/68d104eaff2bd28007ffe0cb_Cameron%20Clark%20on%20Gym-p-500.avif
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/68d1071d3918dca5530a68ff_Cameron%20Clark%20-%20Online%20Step%203.avif
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/68d1071d3918dca5530a68ff_Cameron%20Clark%20-%20Online%20Step%203-p-500.avif
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/68d10a7d1c8715731f49cc14_Cameron%20Clark%20-%20Online%20Step%204.avif
+  https://cdn.prod.website-files.com/687993b9440da6b12adffa8e/687dc142d3c3748af2c32062_Cameron%20Clark%20-%20White.json
