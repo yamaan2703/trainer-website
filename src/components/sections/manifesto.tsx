@@ -47,9 +47,9 @@ export function Manifesto() {
   return (
     <section ref={root} className="section-pad bg-surface">
       <Container>
-        <Eyebrow className="mb-8 text-ink-muted sm:mb-12">{reality.eyebrow}</Eyebrow>
-        <p className="max-w-5xl text-[7.5vw] font-black uppercase leading-[1.05] tracking-tight sm:text-[3.75vw]">
-          <span className="text-copper">{reality.heading}</span>{" "}
+        <Eyebrow className="mb-8 text-ink-muted">{reality.eyebrow}</Eyebrow>
+        <p className="max-w-5xl text-[7.5vw] font-normal uppercase leading-[1.05] tracking-tight sm:text-[3.5vw]">
+          <span className="text-orange-600">{reality.heading}</span>{" "}
           {reality.body.map((paragraph) => (
             <Words key={paragraph} text={paragraph} />
           ))}

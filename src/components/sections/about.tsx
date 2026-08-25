@@ -57,7 +57,7 @@ export function About() {
             <dl className="mt-8 grid grid-cols-2 gap-6 border-t border-hairline pt-8 sm:grid-cols-4 lg:grid-cols-2">
               {about.values.map((value, i) => (
                 <Reveal key={value.title} delay={0.06 + i * 0.05}>
-                  <dt className="font-mono text-xs text-copper">0{i + 1}</dt>
+                  <dt className="font-mono text-xs text-orange-600">0{i + 1}</dt>
                   <dd className="mt-2 text-sm font-semibold text-ink">{value.title}</dd>
                   <dd className="mt-1 text-sm text-ink-muted">{value.description}</dd>
                 </Reveal>

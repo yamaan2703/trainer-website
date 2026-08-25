@@ -12,21 +12,43 @@ export const site = {
   phoneHref: "tel:6507760600",
   emailHref: "mailto:cameron@cameronclarkfitness.com?subject=Contact",
   discoveryCallHref: "#contact",
+  social: [
+    {
+      label: "Facebook",
+      href: "https://www.facebook.com/CameronClarkFitness/",
+      network: "facebook" as const,
+    },
+    {
+      label: "Instagram",
+      href: "https://www.instagram.com/cameronclarkfitness/",
+      network: "instagram" as const,
+    },
+    {
+      label: "LinkedIn",
+      href: "https://www.linkedin.com/in/cameronclarkfitness/",
+      network: "linkedin" as const,
+    },
+  ],
 };
 
+/** Desktop/horizontal nav — labels mirror the reference hero composition. */
 export const nav = [
+  { label: "Home", href: "#top" },
   { label: "About", href: "#about" },
-  { label: "Services", href: "#services" },
-  { label: "Story", href: "#story" },
-  { label: "Process", href: "#process" },
-  { label: "Contact", href: "#contact" },
+  { label: "How It Works", href: "#process" },
+  { label: "Results", href: "#results" },
+  { label: "Testimonials", href: "#testimonials" },
 ];
 
 export const hero = {
   eyebrow: "Personal Fitness Coaching — Online & In-Person",
+  headlineLine1: "Stop Wondering ",
+  headlineLine2: "What Will Hurt",
   headline: "Stop Wondering What Will Hurt When You Wake Up",
-  cta: "Start Your Executive Reset",
-  sub: "You've crushed it professionally. Somewhere along the way, your body became the casualty of your success. Something has to change.",
+  cta: "Book a Class",
+  sub: "Get stronger, leaner, and more energized with custom fitness and nutrition coaching that fits your lifestyle.",
+  stat: "20+",
+  statLabel: "Years Coaching",
 };
 
 export const press = [
@@ -51,42 +73,96 @@ export const servicesIntro = {
   body: "Your body isn't a stock model, it's a high-performance machine that deserves a custom rebuild. Every service we offer is engineered to fit your lifestyle, maximize your time, and deliver results you can sustain.",
 };
 
+/**
+ * Service cards. Each one carries everything the stacked-card layout needs:
+ * the framed image label, a single-sentence headline, the supporting copy,
+ * and the deliverables column on the right. All copy is lifted from the
+ * corresponding service page in website-content.md.
+ */
 export const services = [
   {
-    index: "01",
+    index: "1",
     id: "online",
+    label: "Online Coaching",
     title: "The Elevated Professional Program",
+    headline: "From exhausted executive to peak performer in 8 weeks.",
     description:
-      "Strategic fitness system built for busy professionals who want lasting results without overhauling their life.",
+      "A precision-engineered health system built for high-performing executives who want to regain the physical edge they lost while building their careers. Strategic assessment, a custom rebuild, then ongoing tuning, so the program evolves as fast as your life does.",
     detail:
       "A precision-engineered health system for executives who want to regain the physical edge they've lost while building their careers.",
+    deliverables: [
+      "Strategic Assessment",
+      "Custom Program Design",
+      "Efficient Workouts",
+      "Nutrition Strategy",
+      "Recovery Systems",
+      "Weekly Coaching",
+      "Real-time Adjustments",
+      "Direct Access to Cameron",
+    ],
     stat: "$1,500",
     statLabel: "8-week reset",
     cta: "Explore the program",
     image: "/images/service-online.png",
   },
   {
-    index: "02",
+    index: "2",
     id: "in-person",
+    label: "In-Person Training",
     title: "Tailored In-Person Training",
+    headline: "The premium in-person experience.",
     description:
-      "Customized, hands-on coaching sessions tailored to fit your hectic schedule and unique goals.",
+      "When you train in person, you're not working with a random gym trainer, you're working directly with Cameron. Every movement is monitored, every adjustment tailored, and every session designed to fit your demanding lifestyle.",
     detail:
       "For professionals in Dallas and the Bay Area who need real-time corrections and precise, focused attention.",
+    deliverables: [
+      "Real-time Corrections",
+      "Movement Screening",
+      "Precision Form Coaching",
+      "Face-to-face Accountability",
+      "Session Programming",
+      "Schedule Flexibility",
+      "Dallas & Bay Area",
+    ],
     stat: "20 yrs",
     statLabel: "specialized expertise",
     cta: "Explore the program",
     image: "/images/service-in-person.png",
   },
+  {
+    index: "3",
+    id: "partnership",
+    label: "Ongoing Partnership",
+    title: "Ongoing Performance Partnership",
+    headline: "Continuous evolution as your life changes.",
+    description:
+      "Most clients continue after the first eight weeks for ongoing tuning, quarterly reviews and long-term support, so the gains you made under pressure hold through travel, deadlines and everything else the calendar throws at you.",
+    detail:
+      "Long-term health and energy maintenance, with quarterly reviews and priority access to Cameron.",
+    deliverables: [
+      "Ongoing Tuning",
+      "Quarterly Reviews",
+      "Priority Access",
+      "Program Evolution",
+      "Long-term Maintenance",
+      "Direct Support",
+    ],
+    stat: "$500",
+    statLabel: "per month",
+    cta: "Continue your progress",
+    image: "/images/deadlift.png",
+  },
 ];
 
 export const story = {
-  eyebrow: "Story",
-  heading: "Life in the Passing Lane",
-  paragraphs: [
-    "When Cameron hangs up the coaching hat, you'll find him embracing his most important role: girl dad. Whether it's chasing adventures with his daughter, cheering her on at activities, or simply being present for life's everyday moments, he's committed to modeling the healthy, active lifestyle he teaches his clients.",
-    "And then there's the garage, the place where classic British cars wait for his hands and his patience. To Cameron, each restoration tells a story. You don't rush the process. You honor the craftsmanship, you source the right parts, and you bring something timeless back to life. It's the same philosophy he applies to fitness, slow enough to be intentional, precise enough to last, and always done with care.",
-  ],
+  // Palomino-style split: label + body + CTA on the left, full-bleed
+  // portrait image on the right with a center clip-path open on scroll.
+  eyebrow: "Our Story",
+  body: "When Cameron hangs up the coaching hat, you'll find him embracing his most important role: girl dad. And then there's the garage, the place where classic British cars wait for his hands and his patience. To Cameron, each restoration tells a story — you don't rush the process, you honor the craftsmanship, and you bring something timeless back to life.",
+  cta: "About us",
+  ctaHref: "#about",
+  image: "/images/story-daughter.jpg",
+  imageAlt: "Cameron Clark with his daughter",
 };
 
 export const outcomes = {
@@ -95,10 +171,26 @@ export const outcomes = {
   intro:
     "Within 8 weeks, you'll feel like you did before life got in the way. That's not marketing speak. That's what happens when you stop trying to train like you're 25 and start training like the strategic professional you are.",
   items: [
-    "Waking up without wondering what's going to hurt today",
-    "Having energy left for family time after long work days",
-    "Confidence in their physical capabilities again",
-    "A sustainable system they can maintain long-term",
+    {
+      text: "Waking up without wondering what's going to hurt today",
+      image: "/images/portrait-confident.jpg",
+      alt: "Cameron Clark looking confident and recovered",
+    },
+    {
+      text: "Having energy left for family time after long work days",
+      image: "/images/story-daughter.jpg",
+      alt: "Cameron Clark with his daughter",
+    },
+    {
+      text: "Confidence in their physical capabilities again",
+      image: "/images/hero-physique.png",
+      alt: "Cameron Clark training with focused strength",
+    },
+    {
+      text: "A sustainable system they can maintain long-term",
+      image: "/images/service-in-person.png",
+      alt: "In-person coaching session with Cameron",
+    },
   ],
 };
 
@@ -113,18 +205,30 @@ export const process = {
       title: "Discovery Call",
       description:
         "We start with a focused conversation to understand your goals and current situation, and see the right program for you.",
+      image: "/images/portrait-confident.jpg",
+      imageAlt: "Coaching consultation with Cameron",
+      cta: "Book a discovery call",
+      ctaHref: "#contact",
     },
     {
       index: "02",
       title: "Strategic Onboarding",
       description:
         "You'll complete a health and lifestyle assessment so we can design a tailored program ready to launch within 48 hours.",
+      image: "/images/service-online.png",
+      imageAlt: "Program setup and lifestyle assessment",
+      cta: "See how onboarding works",
+      ctaHref: "#process",
     },
     {
       index: "03",
       title: "Execute & Optimize",
       description:
         "Begin training with direct support, weekly check-ins, and ongoing adjustments to keep your progress on track.",
+      image: "/images/deadlift.png",
+      imageAlt: "Training session with ongoing support",
+      cta: "View client results",
+      ctaHref: "#results",
     },
   ],
 };
@@ -134,30 +238,36 @@ export const testimonials = [
     quote:
       "I've seen major improvements in my core strength and stamina. Cameron always delivers great workouts and solid advice that keeps me progressing.",
     name: "Hansol L.",
+    rating: 5,
   },
   {
     quote:
       "Cameron is an excellent coach who motivates me to do my best and has helped me improve my overall fitness and core strength.",
     name: "Flora",
+    rating: 5,
   },
   {
     quote:
       "I have had a great experience working with Cameron, very helpful and patient about current goals and abilities and tailors his approach in a very understanding way.",
     name: "Jake S.",
+    rating: 5,
   },
   {
     quote: "The work I do with Cameron helps me with other activities I enjoy.",
     name: "Matt M.",
+    rating: 5,
   },
   {
     quote:
       "I am very happy. I wasn't very motivated to go to the gym, but now thanks to Cameron I understand how I can use the equipment and how to create an effective exercise routine.",
     name: "Renzo F.",
+    rating: 5,
   },
   {
     quote:
       "Training with Cameron is awesome (and don't get me wrong, tough, but that's what you want right)! After a quick consultation he put together a custom routine that will push you in ways you just can't and won't push yourself.",
     name: "Will James Johnson",
+    rating: 5,
     image: "/images/testimonial-will.jpg",
   },
 ];
@@ -220,6 +330,8 @@ export const about = {
 
 export const finalCta = {
   heading: "Ready to Get Back in the Driver's Seat?",
+  /** Line breaks for the asymmetric display composition (same words as heading). */
+  headingLines: ["Ready to Get Back", "in the Driver's", "Seat?"],
   body: "If you're a medical professional or tech executive who's tired of feeling older than your age, and you're ready to invest in a solution that actually works for your lifestyle, let's talk.",
   cta: "Book a Discovery Call",
 };
@@ -227,4 +339,40 @@ export const finalCta = {
 export const footer = {
   tagline: "Personal fitness coaching for professionals who refuse to slow down.",
   credit: "Website by Sites at Scale",
+};
+
+/**
+ * Cinematic results timeline — three full-bleed chapters that wipe into one
+ * another on scroll. Copy is the Results Timeline from the Elevated
+ * Professional Program page (website-content.md §4).
+ */
+export const timeline = {
+  eyebrow: "The Results You Can Expect",
+  heading: "Eight Weeks, Three Chapters",
+  chapters: [
+    {
+      id: "weeks-2-3",
+      marker: "Weeks 2 - 3",
+      title: "Sleep Improves",
+      script: "afternoon crashes disappear",
+      body: "The first thing to come back is your energy. Deeper sleep, steadier mornings, and no more 3 PM wall to push through.",
+      image: "/images/timeline-01.png",
+    },
+    {
+      id: "weeks-4-6",
+      marker: "Weeks 4 - 6",
+      title: "Strength Returns",
+      script: "and confidence with it",
+      body: "Load goes up, movement gets cleaner, and you start trusting your body again under real weight and real fatigue.",
+      image: "/images/timeline-02.jpg",
+    },
+    {
+      id: "week-8",
+      marker: "Week 8 +",
+      title: "You Feel Yourself",
+      script: "sharp, energized, unstoppable",
+      body: "The full reset. Not a peak you have to defend, but a baseline you can hold through travel, deadlines and everything after.",
+      image: "/images/timeline-03.jpg",
+    },
+  ],
 };

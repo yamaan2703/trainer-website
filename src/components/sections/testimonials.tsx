@@ -1,96 +1,189 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useRef } from "react";
 import Image from "next/image";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { Star } from "lucide-react";
 import { testimonials } from "@/lib/content";
 import { Container } from "@/components/layout/container";
 import { Eyebrow } from "@/components/shared/eyebrow";
-import { EASE_OUT } from "@/lib/animations/motion-variants";
+import { Reveal } from "@/components/motion/reveal";
+import { useGsap } from "@/hooks/use-gsap";
+import { gsap, ScrollTrigger } from "@/lib/animations/gsap";
 
-const AUTO_ADVANCE_MS = 6500;
+function initialsOf(name: string) {
+  return name
+    .split(" ")
+    .slice(0, 2)
+    .map((part) => part[0])
+    .join("");
+}
+
+function Rating({ value, name }: { value: number; name: string }) {
+  return (
+    <div
+      className="flex items-center gap-1"
+      aria-label={`${value} out of 5 stars from ${name}`}
+    >
+      {Array.from({ length: 5 }, (_, i) => (
+        <Star
+          key={i}
+          aria-hidden
+          strokeWidth={0}
+          className={`h-3.5 w-3.5 ${i < value ? "fill-orange-600" : "fill-ink/15"}`}
+        />
+      ))}
+    </div>
+  );
+}
 
 export function Testimonials() {
-  const [index, setIndex] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const prefersReducedMotion = useReducedMotion();
-  const active = testimonials[index];
+  const root = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (paused || prefersReducedMotion) return;
-    const id = setInterval(() => {
-      setIndex((i) => (i + 1) % testimonials.length);
-    }, AUTO_ADVANCE_MS);
-    return () => clearInterval(id);
-  }, [paused, prefersReducedMotion]);
+  useGsap(
+    root,
+    () => {
+      const scope = root.current!;
+      const track = trackRef.current!;
+      const items = gsap.utils.toArray<HTMLElement>("[data-t-item]", track);
+      const mm = gsap.matchMedia();
+
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        const distance = () =>
+          Math.max(0, track.scrollWidth - window.innerWidth);
+
+        const sizeTrack = () => {
+          scope.style.height = `${window.innerHeight + distance()}px`;
+        };
+        sizeTrack();
+        ScrollTrigger.addEventListener("refreshInit", sizeTrack);
+
+        const grade = () => {
+          const mid = window.innerWidth / 2;
+          const reach = window.innerWidth * 0.62;
+
+          items.forEach((item) => {
+            const card = item.querySelector<HTMLElement>("[data-t-card]");
+            const rect = item.getBoundingClientRect();
+            const d = Math.min(
+              1,
+              Math.abs(rect.left + rect.width / 2 - mid) / reach
+            );
+
+            // Mild depth only — heavy y shifts fought the concave silhouette.
+            gsap.set(item, {
+              scale: 1 - d * 0.08,
+              yPercent: d * 1.25,
+              rotate: 0,
+            });
+            if (card) gsap.set(card, { opacity: 1 - d * 0.28 });
+          });
+        };
+
+        gsap.to(track, {
+          x: () => -distance(),
+          ease: "none",
+          scrollTrigger: {
+            trigger: scope,
+            start: "top top",
+            end: "bottom bottom",
+            scrub: 0.7,
+            invalidateOnRefresh: true,
+            onUpdate: grade,
+            onRefresh: grade,
+          },
+        });
+
+        grade();
+
+        return () => {
+          ScrollTrigger.removeEventListener("refreshInit", sizeTrack);
+          scope.style.removeProperty("height");
+          gsap.set(items, { clearProps: "transform" });
+          gsap.set(
+            items
+              .map((item) => item.querySelector("[data-t-card]"))
+              .filter(Boolean),
+            { clearProps: "opacity" }
+          );
+        };
+      });
+
+      return () => mm.revert();
+    },
+    []
+  );
 
   return (
-    <section
-      className="section-pad bg-surface"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-    >
-      <Container>
-        <Eyebrow className="text-ink-muted">Client Results</Eyebrow>
+    <section id="testimonials" className="bg-surface">
+      <div
+        ref={root}
+        className="relative h-[320svh] sm:h-[280svh] motion-reduce:!h-auto"
+      >
+        {/*
+          Heading lives inside the sticky frame so the gap to the cards stays
+          fixed for the whole scrub — centering the rail alone left a ~½-viewport
+          void under the title.
+        */}
+        <div className="sticky top-0 flex h-[100svh] flex-col overflow-hidden motion-reduce:static motion-reduce:h-auto motion-reduce:py-16">
+          <Container className="shrink-0 pt-[calc(var(--header-h)+1.25rem)] pb-5 sm:pb-6">
+            <Reveal>
+              <Eyebrow className="text-ink-muted">Client Results</Eyebrow>
+            </Reveal>
+            <Reveal delay={0.05}>
+              <h2 className="mt-5 max-w-2xl text-[10vw] font-black uppercase leading-[0.95] tracking-tight sm:text-[4vw]">
+                What Clients Say
+              </h2>
+            </Reveal>
+          </Container>
 
-        <div className="mt-12 grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16">
-          <div className="min-h-[260px] lg:col-span-9">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -16 }}
-                transition={{ duration: 0.5, ease: EASE_OUT }}
-              >
-                <p className="max-w-3xl text-[6.5vw] font-medium leading-[1.15] tracking-tight text-balance sm:text-[2.4vw]">
-                  &ldquo;{active.quote}&rdquo;
-                </p>
-                <div className="mt-8 flex items-center gap-4">
-                  {active.image && (
-                    <Image
-                      src={active.image}
-                      alt=""
-                      width={44}
-                      height={44}
-                      className="h-11 w-11 rounded-full object-cover grayscale"
-                    />
-                  )}
-                  <span className="text-sm uppercase tracking-[0.15em] text-ink-muted">
-                    {active.name}
-                  </span>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-
-          <div className="flex flex-row gap-2 lg:col-span-3 lg:flex-col lg:justify-center lg:gap-3">
-            {testimonials.map((t, i) => (
-              <button
-                key={t.name}
-                type="button"
-                onClick={() => setIndex(i)}
-                aria-label={`Show testimonial from ${t.name}`}
-                aria-current={i === index}
-                className="group flex items-center gap-3 py-1 text-left"
-              >
-                <span
-                  className={`h-px flex-1 transition-colors lg:flex-none lg:w-8 ${
-                    i === index ? "bg-copper" : "bg-hairline group-hover:bg-ink-muted"
-                  }`}
-                />
-                <span
-                  className={`hidden text-xs uppercase tracking-[0.1em] transition-colors lg:block ${
-                    i === index ? "text-ink" : "text-ink-muted"
-                  }`}
+          <div className="flex min-h-0 flex-1 items-start pt-2 sm:pt-3 motion-reduce:items-stretch motion-reduce:pt-8">
+            <div
+              ref={trackRef}
+              className="flex w-max items-start gap-[6vw] px-[14vw] will-change-transform sm:gap-[3vw] sm:px-[10vw] lg:gap-[2vw] lg:px-[34vw] motion-reduce:w-full motion-reduce:flex-wrap motion-reduce:justify-center motion-reduce:gap-8 motion-reduce:px-6"
+            >
+              {testimonials.map((t) => (
+                <figure
+                  key={t.name}
+                  data-t-item
+                  className="relative w-[60vw] shrink-0 will-change-transform sm:w-[36vw] lg:w-[24vw] motion-reduce:w-full motion-reduce:max-w-sm"
                 >
-                  {t.name}
-                </span>
-              </button>
-            ))}
+                  <div
+                    data-t-card
+                    className="relative flex h-[68vw] flex-col bg-surface-2 px-6 py-8 text-ink sm:h-[32vw] sm:px-7 sm:py-9 lg:h-[16.5vw] lg:px-8 lg:py-8 motion-reduce:h-auto motion-reduce:min-h-[18rem]"
+                  >
+                    <Rating value={t.rating} name={t.name} />
+                    <blockquote className="mt-5 min-h-0 flex-1 overflow-hidden text-pretty text-base font-medium leading-relaxed text-ink sm:mt-6 sm:text-lg lg:text-[1.05vw] lg:leading-[1.55] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:5]">
+                      &ldquo;{t.quote}&rdquo;
+                    </blockquote>
+                    <figcaption className="mt-8 flex shrink-0 items-center gap-3 border-t border-hairline/70 pt-6 sm:mt-9 sm:pt-7">
+                      {t.image ? (
+                        <Image
+                          src={t.image}
+                          alt=""
+                          width={40}
+                          height={40}
+                          className="h-10 w-10 shrink-0 rounded-full object-cover"
+                        />
+                      ) : (
+                        <span
+                          aria-hidden
+                          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-orange-600/15 text-xs font-semibold tracking-[0.06em] text-orange-600"
+                        >
+                          {initialsOf(t.name)}
+                        </span>
+                      )}
+                      <span className="text-xs font-medium uppercase tracking-[0.16em] text-ink">
+                        {t.name}
+                      </span>
+                    </figcaption>
+                  </div>
+                </figure>
+              ))}
+            </div>
           </div>
         </div>
-      </Container>
+      </div>
     </section>
   );
 }

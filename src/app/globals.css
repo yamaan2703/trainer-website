@@ -7,9 +7,9 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-inter);
-  --font-mono: var(--font-inter);
-  --font-heading: var(--font-inter);
+  --font-sans: var(--font-roboto-condensed);
+  --font-mono: var(--font-roboto-condensed);
+  --font-heading: var(--font-roboto-condensed);
   --color-surface: var(--surface);
   --color-surface-2: var(--surface-2);
   --color-cream: var(--cream);
@@ -19,6 +19,8 @@
   --color-ink-on-cream-muted: var(--ink-on-cream-muted);
   --color-copper: var(--copper);
   --color-copper-ink: var(--copper-ink);
+  --color-lime: var(--lime);
+  --color-lime-ink: var(--lime-ink);
   --color-hairline: var(--hairline);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -59,55 +61,87 @@
 }
 
 :root {
-  /* Cameron Clark Fitness — committed dark editorial palette. */
-  --background: oklch(0.16 0.021 254);
-  --foreground: oklch(0.96 0.009 85);
-  --card: oklch(0.2 0.024 254);
-  --card-foreground: oklch(0.96 0.009 85);
-  --popover: oklch(0.2 0.024 254);
-  --popover-foreground: oklch(0.96 0.009 85);
+  /* 0 = dark editorial, 1 = light. Scrubbed by ThemeTransition after the
+     timeline so the second half of the page opens into a light theme. */
+  --theme-t: 0;
+
+  /* Fixed endpoints the live tokens mix between. */
+  --surface-dark: oklch(0 0 0);
+  --surface-dark-2: oklch(0.055 0 0);
+  --surface-light: oklch(0.975 0.006 85);
+  --surface-light-2: oklch(0.94 0.01 85);
+  --ink-dark: oklch(0.96 0.009 85);
+  --ink-dark-muted: oklch(0.67 0 0);
+  --ink-light: oklch(0.17 0 0);
+  --ink-light-muted: oklch(0.42 0.01 85);
+  --hairline-dark: oklch(1 0 0 / 12%);
+  --hairline-light: oklch(0 0 0 / 12%);
+  --card-dark: oklch(0.19 0 0);
+  --card-light: oklch(1 0 0);
+
+  /* Cameron Clark Fitness — true-black editorial palette (theme-aware). */
+  --background: color-mix(in oklab, var(--surface-dark), var(--surface-light) calc(var(--theme-t) * 100%));
+  --foreground: color-mix(in oklab, var(--ink-dark), var(--ink-light) calc(var(--theme-t) * 100%));
+  --card: color-mix(in oklab, var(--card-dark), var(--card-light) calc(var(--theme-t) * 100%));
+  --card-foreground: color-mix(in oklab, var(--ink-dark), var(--ink-light) calc(var(--theme-t) * 100%));
+  --popover: color-mix(in oklab, var(--card-dark), var(--card-light) calc(var(--theme-t) * 100%));
+  --popover-foreground: color-mix(in oklab, var(--ink-dark), var(--ink-light) calc(var(--theme-t) * 100%));
   --primary: oklch(0.74 0.135 55);
-  --primary-foreground: oklch(0.16 0.021 254);
-  --secondary: oklch(0.24 0.022 254);
-  --secondary-foreground: oklch(0.96 0.009 85);
-  --muted: oklch(0.24 0.022 254);
-  --muted-foreground: oklch(0.65 0.02 240);
+  --primary-foreground: oklch(0.15 0 0);
+  --secondary: color-mix(in oklab, oklch(0.23 0 0), oklch(0.92 0.01 85) calc(var(--theme-t) * 100%));
+  --secondary-foreground: color-mix(in oklab, var(--ink-dark), var(--ink-light) calc(var(--theme-t) * 100%));
+  --muted: color-mix(in oklab, oklch(0.23 0 0), oklch(0.92 0.01 85) calc(var(--theme-t) * 100%));
+  --muted-foreground: color-mix(in oklab, var(--ink-dark-muted), var(--ink-light-muted) calc(var(--theme-t) * 100%));
   --accent: oklch(0.74 0.135 55);
-  --accent-foreground: oklch(0.16 0.021 254);
+  --accent-foreground: oklch(0.15 0 0);
   --destructive: oklch(0.6 0.2 27);
-  --border: oklch(1 0 0 / 12%);
-  --input: oklch(1 0 0 / 14%);
+  --border: color-mix(in oklab, var(--hairline-dark), var(--hairline-light) calc(var(--theme-t) * 100%));
+  --input: color-mix(in oklab, oklch(1 0 0 / 14%), oklch(0 0 0 / 14%) calc(var(--theme-t) * 100%));
   --ring: oklch(0.74 0.135 55 / 55%);
   --chart-1: oklch(0.74 0.135 55);
-  --chart-2: oklch(0.6 0.02 240);
-  --chart-3: oklch(0.45 0.02 240);
-  --chart-4: oklch(0.35 0.02 240);
-  --chart-5: oklch(0.25 0.02 240);
+  --chart-2: oklch(0.6 0 0);
+  --chart-3: oklch(0.45 0 0);
+  --chart-4: oklch(0.35 0 0);
+  --chart-5: oklch(0.25 0 0);
   --radius: 0.25rem;
-  --sidebar: oklch(0.2 0.024 254);
-  --sidebar-foreground: oklch(0.96 0.009 85);
+  --sidebar: color-mix(in oklab, var(--card-dark), var(--card-light) calc(var(--theme-t) * 100%));
+  --sidebar-foreground: color-mix(in oklab, var(--ink-dark), var(--ink-light) calc(var(--theme-t) * 100%));
   --sidebar-primary: oklch(0.74 0.135 55);
-  --sidebar-primary-foreground: oklch(0.16 0.021 254);
-  --sidebar-accent: oklch(0.24 0.022 254);
-  --sidebar-accent-foreground: oklch(0.96 0.009 85);
-  --sidebar-border: oklch(1 0 0 / 12%);
+  --sidebar-primary-foreground: oklch(0.15 0 0);
+  --sidebar-accent: color-mix(in oklab, oklch(0.23 0 0), oklch(0.92 0.01 85) calc(var(--theme-t) * 100%));
+  --sidebar-accent-foreground: color-mix(in oklab, var(--ink-dark), var(--ink-light) calc(var(--theme-t) * 100%));
+  --sidebar-border: color-mix(in oklab, var(--hairline-dark), var(--hairline-light) calc(var(--theme-t) * 100%));
   --sidebar-ring: oklch(0.74 0.135 55 / 55%);
 
-  /* Site-specific tokens, layered on top of the shadcn set above. */
-  --surface: oklch(0.16 0.021 254);
-  --surface-2: oklch(0.13 0.018 254);
+  /* Site-specific tokens — mix with --theme-t so every bg-surface / text-ink
+     consumer transitions together without per-component rewrites. */
+  --surface: color-mix(in oklab, var(--surface-dark), var(--surface-light) calc(var(--theme-t) * 100%));
+  --surface-2: color-mix(in oklab, var(--surface-dark-2), var(--surface-light-2) calc(var(--theme-t) * 100%));
   --cream: oklch(0.94 0.014 85);
-  --ink: oklch(0.96 0.009 85);
-  --ink-muted: oklch(0.68 0.02 240);
-  --ink-on-cream: oklch(0.18 0.02 254);
-  --ink-on-cream-muted: oklch(0.4 0.02 254);
+  --ink: color-mix(in oklab, var(--ink-dark), var(--ink-light) calc(var(--theme-t) * 100%));
+  --ink-muted: color-mix(in oklab, var(--ink-dark-muted), var(--ink-light-muted) calc(var(--theme-t) * 100%));
+  --ink-on-cream: oklch(0.17 0 0);
+  --ink-on-cream-muted: oklch(0.4 0 0);
   --copper: oklch(0.74 0.135 55);
-  --copper-ink: oklch(0.16 0.021 254);
-  --hairline: oklch(1 0 0 / 12%);
+  --copper-ink: oklch(0.15 0 0);
+  /* Hero accent — neon lime from the FitnessCh reference composition. */
+  --lime: oklch(0.9 0.24 128);
+  --lime-ink: oklch(0.12 0 0);
+  --hairline: color-mix(in oklab, var(--hairline-dark), var(--hairline-light) calc(var(--theme-t) * 100%));
 
   --z-nav: 50;
   --z-nav-overlay: 60;
   --z-loader: 100;
+
+  /* Single source of truth for the fixed header's height. The hero offsets
+     itself by exactly this, so the two always sit flush with no drift. */
+  --header-h: 4.5rem;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --header-h: 5rem;
+  }
 }
 
 @layer base {
@@ -118,10 +152,24 @@
     @apply font-sans;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  html::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
   }
   body {
     @apply bg-background text-foreground;
     overflow-x: clip;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  body::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
   }
   ::selection {
     background: var(--copper);
@@ -137,7 +185,7 @@
   /* Section rhythm: breathing room per §3 of the design system — never a
      fixed px value, always fluid so it compresses gracefully on mobile. */
   .section-pad {
-    padding-block: clamp(5rem, 11vw, 10rem);
+    padding-block: clamp(2.5rem, 5.5vw, 5rem);
   }
   .container-edit {
     @apply mx-auto w-full max-w-[1600px] px-6 sm:px-10 lg:px-16;
@@ -185,4 +233,71 @@ html.lenis body {
 
 .lenis.lenis-scrolling iframe {
   pointer-events: none;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Header hairline — hidden at the top of the page, fades in once the user */
+/* scrolls. Written as plain CSS rather than a Tailwind `data-[...]:`      */
+/* variant because that variant did not generate a rule in this setup      */
+/* (verified against the served stylesheet).                              */
+/* ---------------------------------------------------------------------- */
+[data-header-bar] {
+  border-bottom: 1px solid transparent;
+  background-color: transparent;
+  transition:
+    border-color 300ms cubic-bezier(0.65, 0, 0.35, 1),
+    background-color 300ms cubic-bezier(0.65, 0, 0.35, 1),
+    backdrop-filter 300ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+[data-header-bar][data-scrolled="true"] {
+  border-bottom-color: var(--hairline);
+  background-color: color-mix(in oklab, var(--surface) 70%, transparent);
+  backdrop-filter: blur(12px);
+}
+
+/* Timeline pinned chapters own the full viewport — tuck the fixed nav away
+   so it does not sit over the wipe. Restored when the section leaves. */
+html[data-nav-hidden="true"] header {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-100%);
+  transition:
+    opacity 320ms cubic-bezier(0.65, 0, 0.35, 1),
+    transform 320ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+html:not([data-nav-hidden="true"]) header {
+  transition:
+    opacity 320ms cubic-bezier(0.65, 0, 0.35, 1),
+    transform 320ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* White wordmark inverts toward black as --theme-t scrubs 0 → 1. */
+[data-theme-logo] {
+  filter: invert(var(--theme-t));
+}
+
+/* Final CTA → footer tuck (CCTP-style inverted trapezoid).
+   The light section’s bottom corners are clipped away so the black footer
+   reads through as raised side shoulders. */
+:root {
+  --footer-tuck-h: clamp(2.75rem, 5.5vw, 4.5rem);
+  --footer-tuck-inset: clamp(2rem, 5vw, 4.5rem);
+}
+
+[data-footer-tuck] {
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - var(--footer-tuck-h)),
+    calc(100% - var(--footer-tuck-inset)) 100%,
+    var(--footer-tuck-inset) 100%,
+    0 calc(100% - var(--footer-tuck-h))
+  );
+}
+
+[data-footer-panel] {
+  margin-top: calc(var(--footer-tuck-h) * -1);
+  padding-top: var(--footer-tuck-h);
 }

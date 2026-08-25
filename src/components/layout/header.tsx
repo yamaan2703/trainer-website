@@ -1,14 +1,44 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { NavOverlay } from "@/components/layout/nav-overlay";
 import { Container } from "@/components/layout/container";
+import { useLenis } from "@/components/providers/smooth-scroll-provider";
+import { nav, site } from "@/lib/content";
+
+/** Distance (px) scrolled before the header grows its hairline. */
+const BORDER_THRESHOLD = 8;
 
 export function Header() {
   const [open, setOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
+  const barRef = useRef<HTMLDivElement>(null);
+  const lenis = useLenis();
+
+  // Written straight to a data attribute rather than React state: this runs on
+  // every scroll frame, and re-rendering the header that often would be waste.
+  //
+  // Subscribes to Lenis, NOT to `window`'s scroll event — Lenis swallows the
+  // native event entirely, so a plain listener here never runs. The window
+  // fallback only covers the first frames before Lenis mounts.
+  useEffect(() => {
+    const el = barRef.current;
+    if (!el) return;
+
+    const sync = () => {
+      el.dataset.scrolled = String(window.scrollY > BORDER_THRESHOLD);
+    };
+
+    sync();
+
+    if (!lenis) {
+      window.addEventListener("scroll", sync, { passive: true });
+      return () => window.removeEventListener("scroll", sync);
+    }
+    return lenis.on("scroll", sync);
+  }, [lenis]);
 
   const close = () => {
     setOpen(false);
@@ -17,43 +47,75 @@ export function Header() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-[var(--z-nav)]">
-      <div className="border-b border-hairline bg-surface/70 backdrop-blur-md">
-        <Container className="flex h-18 items-center justify-between sm:h-20">
-          <a href="#top" className="flex items-center gap-2.5">
+      <div
+        ref={barRef}
+        data-header-bar
+        data-scrolled="false"
+        className="bg-transparent"
+      >
+        <Container className="flex h-[var(--header-h)] items-center justify-between gap-6 sm:gap-8">
+          <a href="#top" className="relative z-10 flex shrink-0 items-center">
             <Image
               src="/logo/wordmark-white.png"
               alt="Cameron Clark Fitness"
               width={220}
               height={55}
               priority
+              data-theme-logo
               className="h-6 w-auto sm:h-7"
             />
           </a>
 
-          <button
-            ref={triggerRef}
-            type="button"
-            onClick={() => setOpen(true)}
-            aria-haspopup="dialog"
-            aria-expanded={open}
-            className="group flex items-center gap-3 text-ink"
+          {/* Desktop — horizontal links matching the reference navbar. */}
+          <nav
+            aria-label="Primary"
+            className="hidden items-center gap-8 lg:flex xl:gap-10"
           >
-            <span className="hidden text-xs font-medium uppercase tracking-[0.2em] sm:block">
-              Menu
-            </span>
-            <span className="relative flex h-9 w-9 items-center justify-center">
-              <span className="flex flex-col items-end gap-[5px]">
-                <motion.span
-                  animate={{ width: 22 }}
-                  className="h-[1.5px] w-[22px] bg-ink transition-colors group-hover:bg-copper"
-                />
-                <motion.span
-                  animate={{ width: 14 }}
-                  className="h-[1.5px] bg-ink transition-colors group-hover:bg-copper group-hover:w-[22px]"
-                />
+            {nav.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="text-[0.8125rem] font-medium tracking-[0.02em] text-ink/80 transition-colors hover:text-ink"
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
+
+          <div className="relative z-10 flex shrink-0 items-center gap-3 sm:gap-4">
+            <a
+              href={site.discoveryCallHref}
+              className="inline-flex items-center bg-orange-600 px-3.5 py-2 text-[0.6875rem] font-bold uppercase tracking-[0.12em] text-lime-ink transition-colors hover:bg-orange-500 sm:px-5 sm:py-2.5 sm:text-xs"
+            >
+              Discovery Call
+            </a>
+
+            {/* Mobile / tablet — menu trigger opens the overlay. */}
+            <button
+              ref={triggerRef}
+              type="button"
+              onClick={() => setOpen(true)}
+              aria-haspopup="dialog"
+              aria-expanded={open}
+              className="group flex items-center gap-3 text-ink lg:hidden"
+            >
+              <span className="hidden text-xs font-medium uppercase tracking-[0.2em] sm:block">
+                Menu
               </span>
-            </span>
-          </button>
+              <span className="relative flex h-9 w-9 items-center justify-center">
+                <span className="flex flex-col items-end gap-[5px]">
+                  <motion.span
+                    animate={{ width: 22 }}
+                    className="h-[1.5px] w-[22px] bg-ink transition-colors group-hover:bg-lime"
+                  />
+                  <motion.span
+                    animate={{ width: 14 }}
+                    className="h-[1.5px] bg-ink transition-colors group-hover:w-[22px] group-hover:bg-lime"
+                  />
+                </span>
+              </span>
+            </button>
+          </div>
         </Container>
       </div>
 

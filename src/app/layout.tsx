@@ -1,15 +1,16 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Roboto_Condensed } from "next/font/google";
 import { AppProviders } from "@/components/providers/app-providers";
 import { Preloader } from "@/components/loader/preloader";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
+const robotoCondensed = Roboto_Condensed({
+  variable: "--font-roboto-condensed",
   subsets: ["latin"],
   display: "swap",
+  weight: "variable",
 });
 
 const SITE_URL = "https://www.cameronclarkfitness.com";
@@ -41,12 +42,12 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#141d29",
+  themeColor: "#000000",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${inter.variable} h-full antialiased`}>
+    <html lang="en" className={`${robotoCondensed.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <Preloader />
         <AppProviders>

@@ -1,86 +1,189 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, type ReactNode } from "react";
 import Image from "next/image";
 import { story } from "@/lib/content";
-import { Container } from "@/components/layout/container";
-import { Eyebrow } from "@/components/shared/eyebrow";
-import { Reveal } from "@/components/motion/reveal";
 import { useGsap } from "@/hooks/use-gsap";
-import { gsap } from "@/lib/animations/gsap";
+import { gsap, SplitText } from "@/lib/animations/gsap";
+
+/**
+ * Story — modelled on https://palominoprod.com/en "Our Story":
+ * sticky 50/50 split, left copy + CTA, right portrait that opens from a
+ * center clip-path (inset 50% → 0%) while scaling 1.2 → 1. Body copy
+ * reveals line-by-line through SplitText masks.
+ */
+
+function StoryLink({
+  href,
+  children,
+}: {
+  href: string;
+  children: ReactNode;
+}) {
+  return (
+    <a
+      href={href}
+      className="group/link inline-flex w-fit items-center gap-2.5 text-xs uppercase tracking-[0.14em] text-ink sm:text-[0.8125rem]"
+    >
+      <span className="relative block overflow-hidden">
+        <span className="block transition-transform duration-[600ms] ease-[cubic-bezier(0.65,0,0.35,1)] group-hover/link:-translate-y-full">
+          {children}
+        </span>
+        <span
+          aria-hidden
+          className="absolute left-0 top-0 block translate-y-full text-copper transition-transform duration-[600ms] ease-[cubic-bezier(0.65,0,0.35,1)] group-hover/link:translate-y-0"
+        >
+          {children}
+        </span>
+      </span>
+      <span
+        aria-hidden
+        className="transition-transform duration-[600ms] ease-[cubic-bezier(0.65,0,0.35,1)] group-hover/link:translate-x-1.5"
+      >
+        &rarr;
+      </span>
+    </a>
+  );
+}
 
 export function Story() {
-  const root = useRef<HTMLElement>(null);
+  const root = useRef<HTMLDivElement>(null);
 
-  useGsap(root, () => {
-    gsap.to("[data-parallax-slow]", {
-      yPercent: -8,
-      ease: "none",
-      scrollTrigger: { trigger: root.current, start: "top bottom", end: "bottom top", scrub: true },
-    });
-    gsap.to("[data-parallax-fast]", {
-      yPercent: 12,
-      ease: "none",
-      scrollTrigger: { trigger: root.current, start: "top bottom", end: "bottom top", scrub: true },
-    });
-  }, []);
+  useGsap(
+    root,
+    () => {
+      const scope = root.current!;
+      const frame = scope.querySelector<HTMLElement>("[data-story-frame]");
+      const media = scope.querySelector<HTMLElement>("[data-story-media]");
+      const body = scope.querySelector<HTMLElement>("[data-story-body]");
+      const meta = scope.querySelectorAll<HTMLElement>("[data-story-meta]");
+
+      if (!frame || !media || !body) return;
+
+      const mm = gsap.matchMedia();
+
+      // Desktop — scrubbed open while the frame is sticky (Palomino pattern).
+      mm.add("(min-width: 1024px) and (prefers-reduced-motion: no-preference)", () => {
+        const split = SplitText.create(body, {
+          type: "lines",
+          mask: "lines",
+        });
+
+        gsap.set(frame, { clipPath: "inset(50%)" });
+        gsap.set(media, { scale: 1.2 });
+        gsap.set(split.lines, { yPercent: 110 });
+        gsap.set(meta, { autoAlpha: 0, y: 18 });
+
+        const tl = gsap.timeline({
+          defaults: { ease: "none" },
+          scrollTrigger: {
+            trigger: scope,
+            start: "top top",
+            end: "bottom bottom",
+            scrub: 0.65,
+            invalidateOnRefresh: true,
+          },
+        });
+
+        tl.to(frame, { clipPath: "inset(0%)", duration: 0.7 }, 0.1);
+        tl.to(media, { scale: 1, duration: 0.7 }, 0.1);
+        tl.to(meta, { autoAlpha: 1, y: 0, duration: 0.25, stagger: 0.1 }, 0.2);
+        tl.to(split.lines, { yPercent: 0, duration: 0.4, stagger: 0.045 }, 0.24);
+
+        return () => {
+          split.revert();
+        };
+      });
+
+      // Mobile — one-shot entrance, no long sticky track.
+      mm.add("(max-width: 1023px) and (prefers-reduced-motion: no-preference)", () => {
+        const split = SplitText.create(body, {
+          type: "lines",
+          mask: "lines",
+        });
+
+        gsap.set(frame, { clipPath: "inset(50%)" });
+        gsap.set(media, { scale: 1.2 });
+        gsap.set(split.lines, { yPercent: 110 });
+        gsap.set(meta, { autoAlpha: 0, y: 18 });
+
+        const enter = {
+          trigger: scope,
+          start: "top 72%",
+          once: true,
+        } as const;
+
+        gsap
+          .timeline({ defaults: { ease: "expo.out" }, scrollTrigger: enter })
+          .to(frame, { clipPath: "inset(0%)", duration: 1.35 }, 0)
+          .to(media, { scale: 1, duration: 1.45 }, 0)
+          .to(meta, { autoAlpha: 1, y: 0, duration: 0.8, stagger: 0.1 }, 0.2)
+          .to(split.lines, { yPercent: 0, duration: 0.95, stagger: 0.06 }, 0.28);
+
+        return () => {
+          split.revert();
+        };
+      });
+
+      return () => mm.revert();
+    },
+    []
+  );
 
   return (
-    <section
-      id="story"
-      ref={root}
-      className="section-pad overflow-hidden bg-cream text-ink-on-cream"
-    >
-      <Container>
-        <div className="grid grid-cols-1 gap-14 lg:grid-cols-12 lg:gap-8">
-          <div className="lg:col-span-5 lg:pt-8">
-            <Reveal>
-              <Eyebrow className="text-ink-on-cream-muted">{story.eyebrow}</Eyebrow>
-            </Reveal>
-            <Reveal delay={0.05}>
-              <h2 className="mt-6 text-[11vw] font-black uppercase leading-[0.95] tracking-tight sm:text-[3.6vw]">
-                {story.heading}
+    <section id="story" className="bg-surface">
+      <div
+        ref={root}
+        className="relative h-auto lg:h-[160svh] motion-reduce:!h-auto"
+      >
+        <div className="grid grid-cols-1 overflow-hidden bg-surface lg:sticky lg:top-[var(--header-h)] lg:h-[calc(100svh-var(--header-h))] lg:grid-cols-2 motion-reduce:static motion-reduce:h-auto">
+          {/* Left — label, body, CTA. */}
+          <div className="relative z-10 order-2 flex flex-col justify-between gap-12 px-6 py-14 sm:px-10 lg:order-1 lg:px-16 lg:py-16 xl:px-20">
+            <div data-story-meta className="flex items-center gap-2.5">
+              <span
+                aria-hidden
+                className="block size-2.5 shrink-0 rounded-full bg-ink"
+              />
+              <h2 className="text-xs font-medium uppercase tracking-[0.22em] text-ink sm:text-[0.8125rem]">
+                {story.eyebrow}
               </h2>
-            </Reveal>
-            <div className="mt-8 space-y-5">
-              {story.paragraphs.map((p, i) => (
-                <Reveal key={p} delay={0.1 + i * 0.05}>
-                  <p className="text-ink-on-cream-muted leading-relaxed">{p}</p>
-                </Reveal>
-              ))}
+            </div>
+
+            <p
+              data-story-body
+              className="max-w-md text-[1.35rem] font-light leading-[1.35] tracking-tight text-ink sm:text-2xl lg:text-[1.65rem]"
+            >
+              {story.body}
+            </p>
+
+            <div data-story-meta>
+              <StoryLink href={story.ctaHref}>{story.cta}</StoryLink>
             </div>
           </div>
 
-          <div className="relative lg:col-span-7">
+          {/* Right — full portrait with studio black background kept in-frame.
+              Inset slightly shrinks the frame; sticky top clears the navbar. */}
+          <div className="relative order-1 min-h-[58svh] lg:order-2 lg:min-h-0">
             <div
-              data-parallax-slow
-              className="relative aspect-[4/5] w-full overflow-hidden sm:aspect-[16/10]"
+              data-story-frame
+              className="absolute inset-5 overflow-hidden will-change-[clip-path] sm:inset-6 lg:inset-8"
             >
-              <Image
-                src="/images/story-vintage-car.png"
-                alt="Cameron Clark's restored vintage Triumph sports car"
-                fill
-                sizes="(min-width: 1024px) 55vw, 90vw"
-                className="object-cover"
-              />
-            </div>
-
-            <div
-              data-parallax-fast
-              className="absolute -bottom-10 -left-6 w-[48%] max-w-[280px] overflow-hidden border-4 border-cream bg-surface-2 shadow-2xl sm:-bottom-14 sm:left-8"
-            >
-              <Image
-                src="/images/story-daughter.png"
-                alt="Cameron Clark with his daughter"
-                width={600}
-                height={750}
-                sizes="(min-width: 1024px) 20vw, 40vw"
-                className="h-auto w-full object-cover"
-              />
+              <div
+                data-story-media
+                className="absolute inset-0 origin-center will-change-transform"
+              >
+                <Image
+                  src={story.image}
+                  alt={story.imageAlt}
+                  fill
+                  sizes="(min-width: 1024px) 45vw, 100vw"
+                  className="object-contain object-center"
+                />
+              </div>
             </div>
           </div>
         </div>
-      </Container>
+      </div>
     </section>
   );
 }

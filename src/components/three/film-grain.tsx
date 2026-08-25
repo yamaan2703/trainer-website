@@ -70,7 +70,10 @@ export default function FilmGrain() {
       dpr={[1, 1.5]}
       gl={{ antialias: false, alpha: true }}
       camera={{ position: [0, 0, 1], zoom: 1 }}
-      className="pointer-events-none absolute inset-0"
+      // Passed as inline style, not a class: R3F writes its own inline
+      // `pointer-events: auto` on the root div, which a class cannot override.
+      // The caller is responsible for positioning (see Hero's wrapper).
+      style={{ pointerEvents: "none" }}
     >
       <GrainPlane />
     </SceneCanvas>
