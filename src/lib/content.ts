@@ -45,7 +45,7 @@ export const hero = {
   headlineLine1: "Stop Wondering ",
   headlineLine2: "What Will Hurt",
   headline: "Stop Wondering What Will Hurt When You Wake Up",
-  cta: "Book a Class",
+  cta: "Discovery Call",
   sub: "Get stronger, leaner, and more energized with custom fitness and nutrition coaching that fits your lifestyle.",
   stat: "20+",
   statLabel: "Years Coaching",

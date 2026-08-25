@@ -62,7 +62,7 @@ export function NavOverlay({ open, onClose }: NavOverlayProps) {
           role="dialog"
           aria-modal="true"
           aria-label="Site navigation"
-          className="fixed inset-0 z-[var(--z-nav-overlay)] flex flex-col bg-copper text-orange-600-ink"
+          className="fixed inset-0 z-[var(--z-nav-overlay)] flex flex-col bg-orange-600 text-lime-ink"
           initial={{ clipPath: "inset(0 0 100% 0)" }}
           animate={{ clipPath: "inset(0 0 0% 0)" }}
           exit={{ clipPath: "inset(0 0 100% 0)" }}
@@ -76,9 +76,9 @@ export function NavOverlay({ open, onClose }: NavOverlayProps) {
                   initial={{ opacity: 0, y: 24 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.15 + i * 0.05, duration: 0.5, ease: EASE_OUT }}
-                  className="flex items-baseline gap-4 border-b border-copper-ink/15 py-3 sm:py-4"
+                  className="flex items-baseline gap-4 border-b border-lime-ink/15 py-3 sm:py-4"
                 >
-                  <span className="font-mono text-xs text-orange-600-ink/50">
+                  <span className="font-mono text-xs text-lime-ink/50">
                     0{i + 1}
                   </span>
                   <a
@@ -97,10 +97,10 @@ export function NavOverlay({ open, onClose }: NavOverlayProps) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4, duration: 0.5 }}
-              className="mt-10 flex flex-col gap-8 border-t border-copper-ink/15 pt-8 text-sm sm:flex-row sm:items-end sm:justify-between"
+              className="mt-10 flex flex-col gap-8 border-t border-lime-ink/15 pt-8 text-sm sm:flex-row sm:items-end sm:justify-between"
             >
               <div>
-                <p className="text-xs uppercase tracking-[0.2em] text-orange-600-ink/60">
+                <p className="text-xs uppercase tracking-[0.2em] text-lime-ink/60">
                   Get in touch
                 </p>
                 <a href={site.emailHref} className="mt-1 block font-medium hover:underline">
@@ -113,7 +113,7 @@ export function NavOverlay({ open, onClose }: NavOverlayProps) {
               <a
                 href={site.discoveryCallHref}
                 onClick={onClose}
-                className="inline-flex w-fit items-center bg-ink px-5 py-3 text-xs font-bold uppercase tracking-[0.12em] text-cream transition-colors hover:bg-cream hover:text-ink"
+                className="inline-flex w-fit items-center bg-lime-ink px-5 py-2.5 text-xs font-bold uppercase tracking-[0.12em] text-cream transition-colors hover:bg-lime-ink/90"
               >
                 Discovery Call
               </a>

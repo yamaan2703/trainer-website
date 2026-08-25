@@ -41,7 +41,7 @@ function ServiceLink({
         </span>
         <span
           aria-hidden
-          className="absolute left-0 top-0 block translate-y-full text-copper transition-transform duration-[600ms] ease-[cubic-bezier(0.65,0,0.35,1)] group-hover/link:translate-y-0"
+          className="absolute left-0 top-0 block translate-y-full text-orange-600 transition-transform duration-[600ms] ease-[cubic-bezier(0.65,0,0.35,1)] group-hover/link:translate-y-0"
         >
           {children}
         </span>

@@ -81,7 +81,7 @@ export function Preloader() {
             <span className="tabular-nums">{String(progress).padStart(3, "0")}</span>
             <span className="h-px w-16 overflow-hidden bg-hairline">
               <span
-                className="block h-full bg-copper transition-[width] duration-75 ease-linear"
+                className="block h-full bg-orange-600 transition-[width] duration-75 ease-linear"
                 style={{ width: `${progress}%` }}
               />
             </span>

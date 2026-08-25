@@ -86,19 +86,20 @@
   --card-foreground: color-mix(in oklab, var(--ink-dark), var(--ink-light) calc(var(--theme-t) * 100%));
   --popover: color-mix(in oklab, var(--card-dark), var(--card-light) calc(var(--theme-t) * 100%));
   --popover-foreground: color-mix(in oklab, var(--ink-dark), var(--ink-light) calc(var(--theme-t) * 100%));
-  --primary: oklch(0.74 0.135 55);
+  /* Accent locked to Tailwind orange-600 */
+  --primary: oklch(0.646 0.222 41.116);
   --primary-foreground: oklch(0.15 0 0);
   --secondary: color-mix(in oklab, oklch(0.23 0 0), oklch(0.92 0.01 85) calc(var(--theme-t) * 100%));
   --secondary-foreground: color-mix(in oklab, var(--ink-dark), var(--ink-light) calc(var(--theme-t) * 100%));
   --muted: color-mix(in oklab, oklch(0.23 0 0), oklch(0.92 0.01 85) calc(var(--theme-t) * 100%));
   --muted-foreground: color-mix(in oklab, var(--ink-dark-muted), var(--ink-light-muted) calc(var(--theme-t) * 100%));
-  --accent: oklch(0.74 0.135 55);
+  --accent: oklch(0.646 0.222 41.116);
   --accent-foreground: oklch(0.15 0 0);
   --destructive: oklch(0.6 0.2 27);
   --border: color-mix(in oklab, var(--hairline-dark), var(--hairline-light) calc(var(--theme-t) * 100%));
   --input: color-mix(in oklab, oklch(1 0 0 / 14%), oklch(0 0 0 / 14%) calc(var(--theme-t) * 100%));
-  --ring: oklch(0.74 0.135 55 / 55%);
-  --chart-1: oklch(0.74 0.135 55);
+  --ring: oklch(0.646 0.222 41.116 / 55%);
+  --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0 0);
   --chart-3: oklch(0.45 0 0);
   --chart-4: oklch(0.35 0 0);
@@ -106,12 +107,12 @@
   --radius: 0.25rem;
   --sidebar: color-mix(in oklab, var(--card-dark), var(--card-light) calc(var(--theme-t) * 100%));
   --sidebar-foreground: color-mix(in oklab, var(--ink-dark), var(--ink-light) calc(var(--theme-t) * 100%));
-  --sidebar-primary: oklch(0.74 0.135 55);
+  --sidebar-primary: oklch(0.646 0.222 41.116);
   --sidebar-primary-foreground: oklch(0.15 0 0);
   --sidebar-accent: color-mix(in oklab, oklch(0.23 0 0), oklch(0.92 0.01 85) calc(var(--theme-t) * 100%));
   --sidebar-accent-foreground: color-mix(in oklab, var(--ink-dark), var(--ink-light) calc(var(--theme-t) * 100%));
   --sidebar-border: color-mix(in oklab, var(--hairline-dark), var(--hairline-light) calc(var(--theme-t) * 100%));
-  --sidebar-ring: oklch(0.74 0.135 55 / 55%);
+  --sidebar-ring: oklch(0.646 0.222 41.116 / 55%);
 
   /* Site-specific tokens — mix with --theme-t so every bg-surface / text-ink
      consumer transitions together without per-component rewrites. */
@@ -122,7 +123,8 @@
   --ink-muted: color-mix(in oklab, var(--ink-dark-muted), var(--ink-light-muted) calc(var(--theme-t) * 100%));
   --ink-on-cream: oklch(0.17 0 0);
   --ink-on-cream-muted: oklch(0.4 0 0);
-  --copper: oklch(0.74 0.135 55);
+  /* Alias of Tailwind orange-600 — kept for legacy copper-* class usage. */
+  --copper: oklch(0.646 0.222 41.116);
   --copper-ink: oklch(0.15 0 0);
   /* Hero accent — neon lime from the FitnessCh reference composition. */
   --lime: oklch(0.9 0.24 128);
@@ -172,11 +174,11 @@
     height: 0;
   }
   ::selection {
-    background: var(--copper);
+    background: var(--color-orange-600, var(--copper));
     color: var(--copper-ink);
   }
   :focus-visible {
-    outline: 2px solid var(--copper);
+    outline: 2px solid var(--color-orange-600, var(--copper));
     outline-offset: 3px;
   }
 }
@@ -195,7 +197,7 @@
   }
   .eyebrow::before {
     content: "";
-    @apply block h-[5px] w-[5px] shrink-0 bg-copper;
+    @apply block h-[5px] w-[5px] shrink-0 bg-orange-600;
   }
 }
 

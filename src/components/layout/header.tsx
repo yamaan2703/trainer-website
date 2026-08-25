@@ -66,26 +66,26 @@ export function Header() {
             />
           </a>
 
-          {/* Desktop — horizontal links matching the reference navbar. */}
-          <nav
-            aria-label="Primary"
-            className="hidden items-center gap-8 lg:flex xl:gap-10"
-          >
-            {nav.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="text-[0.8125rem] font-medium tracking-[0.02em] text-ink/80 transition-colors hover:text-ink"
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
+          <div className="relative z-10 flex shrink-0 items-center gap-1 sm:gap-2">
+            {/* Desktop links sit on the right, beside the CTA. */}
+            <nav
+              aria-label="Primary"
+              className="mr-1 hidden items-center lg:flex xl:mr-2"
+            >
+              {nav.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="px-3 py-1.5 text-[0.8125rem] font-medium tracking-[0.02em] text-ink/80 transition-colors hover:bg-ink/10 hover:text-ink xl:px-3.5"
+                >
+                  {item.label}
+                </a>
+              ))}
+            </nav>
 
-          <div className="relative z-10 flex shrink-0 items-center gap-3 sm:gap-4">
             <a
               href={site.discoveryCallHref}
-              className="inline-flex items-center bg-orange-600 px-3.5 py-2 text-[0.6875rem] font-bold uppercase tracking-[0.12em] text-lime-ink transition-colors hover:bg-orange-500 sm:px-5 sm:py-2.5 sm:text-xs"
+              className="inline-flex items-center bg-orange-600 px-3.5 py-2 text-[0.6875rem] font-bold uppercase tracking-[0.12em] text-lime-ink transition-colors hover:bg-white sm:px-5 sm:py-2.5 sm:text-xs"
             >
               Discovery Call
             </a>
@@ -97,7 +97,7 @@ export function Header() {
               onClick={() => setOpen(true)}
               aria-haspopup="dialog"
               aria-expanded={open}
-              className="group flex items-center gap-3 text-ink lg:hidden"
+              className="group ml-1 flex items-center gap-3 text-ink lg:hidden"
             >
               <span className="hidden text-xs font-medium uppercase tracking-[0.2em] sm:block">
                 Menu
@@ -106,11 +106,11 @@ export function Header() {
                 <span className="flex flex-col items-end gap-[5px]">
                   <motion.span
                     animate={{ width: 22 }}
-                    className="h-[1.5px] w-[22px] bg-ink transition-colors group-hover:bg-lime"
+                    className="h-[1.5px] w-[22px] bg-ink transition-colors group-hover:bg-orange-600"
                   />
                   <motion.span
                     animate={{ width: 14 }}
-                    className="h-[1.5px] bg-ink transition-colors group-hover:w-[22px] group-hover:bg-lime"
+                    className="h-[1.5px] bg-ink transition-colors group-hover:w-[22px] group-hover:bg-orange-600"
                   />
                 </span>
               </span>

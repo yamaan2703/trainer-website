@@ -166,7 +166,7 @@ export function Timeline() {
                   Hardcoded light type so a global theme scrub never darkens
                   these overlays against the cinematic image. */}
               <div className="absolute inset-0 hidden flex-col items-center justify-center px-6 text-center motion-reduce:flex">
-                <p className="font-mono text-xs uppercase tracking-[0.32em] text-copper sm:text-sm">
+                <p className="font-mono text-xs uppercase tracking-[0.32em] text-orange-600 sm:text-sm">
                   {chapter.marker}
                 </p>
                 <h3 className="mt-6 text-[13vw] font-normal uppercase leading-[0.86] tracking-tight text-white sm:text-[7.5vw] lg:text-8xl">
@@ -192,7 +192,7 @@ export function Timeline() {
                   i === 0 ? "visible opacity-100" : "invisible opacity-0"
                 }`}
               >
-                <p className="font-mono text-xs uppercase tracking-[0.32em] text-copper sm:text-sm">
+                <p className="font-mono text-xs uppercase tracking-[0.32em] text-orange-600 sm:text-sm">
                   {chapter.marker}
                 </p>
                 <h3 className="mt-6 text-[13vw] font-normal uppercase leading-[0.86] tracking-tight text-white sm:text-[7.5vw] lg:text-8xl">

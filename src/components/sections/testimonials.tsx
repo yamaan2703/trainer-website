@@ -6,9 +6,9 @@ import { Star } from "lucide-react";
 import { testimonials } from "@/lib/content";
 import { Container } from "@/components/layout/container";
 import { Eyebrow } from "@/components/shared/eyebrow";
-import { Reveal } from "@/components/motion/reveal";
 import { useGsap } from "@/hooks/use-gsap";
 import { gsap, ScrollTrigger } from "@/lib/animations/gsap";
+import { setupSplitTextReveal } from "@/lib/animations/split-text-reveal";
 
 function initialsOf(name: string) {
   return name
@@ -49,6 +49,11 @@ export function Testimonials() {
       const mm = gsap.matchMedia();
 
       mm.add("(prefers-reduced-motion: no-preference)", () => {
+        const header = scope.querySelector<HTMLElement>("[data-t-header]");
+        const cleanHeader = header
+          ? setupSplitTextReveal({ scope: header, trigger: header })
+          : () => undefined;
+
         const distance = () =>
           Math.max(0, track.scrollWidth - window.innerWidth);
 
@@ -97,6 +102,7 @@ export function Testimonials() {
         grade();
 
         return () => {
+          cleanHeader();
           ScrollTrigger.removeEventListener("refreshInit", sizeTrack);
           scope.style.removeProperty("height");
           gsap.set(items, { clearProps: "transform" });
@@ -127,14 +133,17 @@ export function Testimonials() {
         */}
         <div className="sticky top-0 flex h-[100svh] flex-col overflow-hidden motion-reduce:static motion-reduce:h-auto motion-reduce:py-16">
           <Container className="shrink-0 pt-[calc(var(--header-h)+1.25rem)] pb-5 sm:pb-6">
-            <Reveal>
-              <Eyebrow className="text-ink-muted">Client Results</Eyebrow>
-            </Reveal>
-            <Reveal delay={0.05}>
-              <h2 className="mt-5 max-w-2xl text-[10vw] font-black uppercase leading-[0.95] tracking-tight sm:text-[4vw]">
+            <div data-t-header>
+              <div data-split-meta>
+                <Eyebrow className="text-ink-muted">Client Results</Eyebrow>
+              </div>
+              <h2
+                data-split-body
+                className="mt-5 max-w-2xl text-[10vw] font-black uppercase leading-[0.95] tracking-tight sm:text-[4vw]"
+              >
                 What Clients Say
               </h2>
-            </Reveal>
+            </div>
           </Container>
 
           <div className="flex min-h-0 flex-1 items-start pt-2 sm:pt-3 motion-reduce:items-stretch motion-reduce:pt-8">

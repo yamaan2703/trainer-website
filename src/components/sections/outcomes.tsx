@@ -5,14 +5,14 @@ import Image from "next/image";
 import { outcomes } from "@/lib/content";
 import { Container } from "@/components/layout/container";
 import { Eyebrow } from "@/components/shared/eyebrow";
-import { Reveal } from "@/components/motion/reveal";
 import { useGsap } from "@/hooks/use-gsap";
 import { gsap } from "@/lib/animations/gsap";
+import { setupSplitTextReveal } from "@/lib/animations/split-text-reveal";
 
 /**
  * Outcomes — typographic rows with a desktop hover preview:
  * related image slides in from the right and fades out on leave.
- * Entrance animations (index / text / rule) stay as before.
+ * Header copy uses the Story SplitText reveal.
  */
 export function Outcomes() {
   const root = useRef<HTMLElement>(null);
@@ -20,12 +20,18 @@ export function Outcomes() {
   useGsap(
     root,
     () => {
-      const rows = gsap.utils.toArray<HTMLElement>("[data-outcome-row]", root.current);
+      const scope = root.current!;
+      const header = scope.querySelector<HTMLElement>("[data-outcomes-header]");
+      const rows = gsap.utils.toArray<HTMLElement>("[data-outcome-row]", scope);
       if (rows.length === 0) return;
 
       const mm = gsap.matchMedia();
 
       mm.add("(prefers-reduced-motion: no-preference)", () => {
+        const cleanHeader = header
+          ? setupSplitTextReveal({ scope: header, trigger: header })
+          : () => undefined;
+
         rows.forEach((row) => {
           const index = row.querySelector("[data-outcome-index]");
           const text = row.querySelector("[data-outcome-text]");
@@ -48,6 +54,8 @@ export function Outcomes() {
             .to(text, { yPercent: 0, duration: 0.85 }, 0.06)
             .to(rule, { scaleX: 1, duration: 0.8 }, 0.2);
         });
+
+        return () => cleanHeader();
       });
 
       return () => mm.revert();
@@ -63,23 +71,28 @@ export function Outcomes() {
     >
       <Container>
         <div className="border-t border-hairline pt-12 lg:pt-16">
-          <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-end lg:gap-x-12">
+          <div
+            data-outcomes-header
+            className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-end lg:gap-x-12"
+          >
             <div className="lg:col-span-5">
-              <Reveal>
+              <div data-split-meta>
                 <Eyebrow className="text-ink-muted">{outcomes.eyebrow}</Eyebrow>
-              </Reveal>
-              <Reveal delay={0.05}>
-                <h2 className="mt-5 max-w-[10ch] text-[12vw] font-black uppercase leading-[0.9] tracking-tight text-ink sm:text-6xl lg:text-[clamp(2.75rem,4.2vw,4.25rem)]">
-                  {outcomes.heading}
-                </h2>
-              </Reveal>
+              </div>
+              <h2
+                data-split-body
+                className="mt-5 max-w-[10ch] text-[12vw] font-black uppercase leading-[0.9] tracking-tight text-ink sm:text-6xl lg:text-[clamp(2.75rem,4.2vw,4.25rem)]"
+              >
+                {outcomes.heading}
+              </h2>
             </div>
             <div className="lg:col-span-6 lg:col-start-7">
-              <Reveal delay={0.1}>
-                <p className="max-w-md text-base leading-relaxed text-ink-muted sm:text-lg">
-                  {outcomes.intro}
-                </p>
-              </Reveal>
+              <p
+                data-split-body
+                className="max-w-md text-base leading-relaxed text-ink-muted sm:text-lg"
+              >
+                {outcomes.intro}
+              </p>
             </div>
           </div>
 
@@ -113,9 +126,7 @@ export function Outcomes() {
 
                 {/* Hover preview — slides in from the right on desktop. */}
                 <div className="pointer-events-none relative hidden h-40 overflow-hidden lg:block xl:h-44">
-                  <div
-                    className="absolute inset-0 translate-x-5 opacity-0 transition-[opacity,transform] duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0 group-hover:opacity-100 motion-reduce:transition-none"
-                  >
+                  <div className="absolute inset-0 translate-x-5 opacity-0 transition-[opacity,transform] duration-[400ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0 group-hover:opacity-100 motion-reduce:transition-none">
                     <Image
                       src={item.image}
                       alt={item.alt}

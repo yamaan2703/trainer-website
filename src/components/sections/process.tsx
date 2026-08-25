@@ -5,9 +5,9 @@ import Image from "next/image";
 import { process } from "@/lib/content";
 import { Container } from "@/components/layout/container";
 import { Eyebrow } from "@/components/shared/eyebrow";
-import { Reveal } from "@/components/motion/reveal";
 import { useGsap } from "@/hooks/use-gsap";
 import { gsap } from "@/lib/animations/gsap";
+import { setupSplitTextReveal } from "@/lib/animations/split-text-reveal";
 
 const STEP_DURATION = 5;
 
@@ -27,17 +27,21 @@ export function Process() {
   useGsap(
     root,
     () => {
-      const list = root.current?.querySelector<HTMLElement>(
-        "[data-process-list]"
-      );
+      const scope = root.current!;
+      const list = scope.querySelector<HTMLElement>("[data-process-list]");
+      const header = scope.querySelector<HTMLElement>("[data-process-header]");
       const rows = gsap.utils.toArray<HTMLElement>(
         "[data-process-row]",
-        root.current
+        scope
       );
       if (!list || rows.length === 0) return;
 
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
+        const cleanHeader = header
+          ? setupSplitTextReveal({ scope: header, trigger: header })
+          : () => undefined;
+
         gsap.from(rows, {
           autoAlpha: 0,
           y: 18,
@@ -50,6 +54,8 @@ export function Process() {
             once: true,
           },
         });
+
+        return () => cleanHeader();
       });
 
       return () => mm.revert();
@@ -213,14 +219,17 @@ export function Process() {
           <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-12 lg:items-stretch lg:gap-x-10 xl:gap-x-12">
             {/* Left — constrained so type never spills into the image column */}
             <div className="@container/process min-w-0 w-full max-w-full lg:col-span-6">
-              <Reveal className="min-w-0 max-w-full">
-                <Eyebrow className="text-ink-muted">{process.eyebrow}</Eyebrow>
-              </Reveal>
-              <Reveal delay={0.05} className="min-w-0 max-w-full">
-                <h2 className="mt-5 w-full max-w-[10ch] break-words text-[clamp(2.75rem,11vw,4.25rem)] font-black uppercase leading-[0.88] tracking-tight text-ink lg:text-[clamp(3.25rem,14cqi,5rem)]">
+              <div data-process-header className="min-w-0 max-w-full">
+                <div data-split-meta>
+                  <Eyebrow className="text-ink-muted">{process.eyebrow}</Eyebrow>
+                </div>
+                <h2
+                  data-split-body
+                  className="mt-5 w-full max-w-[10ch] break-words text-[clamp(2.75rem,11vw,4.25rem)] font-black uppercase leading-[0.88] tracking-tight text-ink lg:text-[clamp(3.25rem,14cqi,5rem)]"
+                >
                   {process.heading}
                 </h2>
-              </Reveal>
+              </div>
 
               <div
                 data-process-list
