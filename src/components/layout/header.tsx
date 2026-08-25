@@ -2,16 +2,20 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { NavOverlay } from "@/components/layout/nav-overlay";
 import { Container } from "@/components/layout/container";
 import { useLenis } from "@/components/providers/smooth-scroll-provider";
 import { nav, site } from "@/lib/content";
+import { isNavActive } from "@/lib/nav";
+import { cn } from "@/lib/utils";
 
 /** Distance (px) scrolled before the header grows its hairline. */
 const BORDER_THRESHOLD = 8;
 
 export function Header() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const barRef = useRef<HTMLDivElement>(null);
@@ -54,7 +58,7 @@ export function Header() {
         className="bg-transparent"
       >
         <Container className="flex h-[var(--header-h)] items-center justify-between gap-6 sm:gap-8">
-          <a href="#top" className="relative z-10 flex shrink-0 items-center">
+          <a href="/" className="relative z-10 flex shrink-0 items-center">
             <Image
               src="/logo/wordmark-white.png"
               alt="Cameron Clark Fitness"
@@ -67,20 +71,30 @@ export function Header() {
           </a>
 
           <div className="relative z-10 flex shrink-0 items-center gap-1 sm:gap-2">
-            {/* Desktop links sit on the right, beside the CTA. */}
             <nav
               aria-label="Primary"
               className="mr-1 hidden items-center lg:flex xl:mr-2"
             >
-              {nav.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  className="px-3 py-1.5 text-[0.8125rem] font-medium tracking-[0.02em] text-ink/80 transition-colors hover:bg-ink/10 hover:text-ink xl:px-3.5"
-                >
-                  {item.label}
-                </a>
-              ))}
+              {nav.map((item) => {
+                const active = isNavActive({ href: item.href, pathname });
+
+                return (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    aria-current={active ? "page" : undefined}
+                    data-active={active ? "true" : undefined}
+                    className={cn(
+                      "px-3 py-1.5 text-[0.8125rem] font-medium tracking-[0.02em] transition-colors hover:bg-ink/10 xl:px-3.5",
+                      active
+                        ? "text-orange-600 hover:text-orange-600"
+                        : "text-ink/80 hover:text-ink"
+                    )}
+                  >
+                    {item.label}
+                  </a>
+                );
+              })}
             </nav>
 
             <a
@@ -90,7 +104,6 @@ export function Header() {
               Discovery Call
             </a>
 
-            {/* Mobile / tablet — menu trigger opens the overlay. */}
             <button
               ref={triggerRef}
               type="button"

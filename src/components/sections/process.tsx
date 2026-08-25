@@ -42,17 +42,20 @@ export function Process() {
           ? setupSplitTextReveal({ scope: header, trigger: header })
           : () => undefined;
 
-        gsap.from(rows, {
-          autoAlpha: 0,
-          y: 18,
-          duration: 0.7,
-          stagger: 0.07,
-          ease: "expo.out",
-          scrollTrigger: {
-            trigger: list,
-            start: "top 85%",
-            once: true,
-          },
+        rows.forEach((row, i) => {
+          gsap.set(row, { autoAlpha: 0, y: 18 });
+          gsap.to(row, {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.7,
+            delay: i * 0.07,
+            ease: "expo.out",
+            scrollTrigger: {
+              trigger: row,
+              start: "top 90%",
+              once: true,
+            },
+          });
         });
 
         return () => cleanHeader();

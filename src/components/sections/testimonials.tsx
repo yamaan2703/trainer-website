@@ -159,30 +159,30 @@ export function Testimonials() {
                 >
                   <div
                     data-t-card
-                    className="relative flex h-[68vw] flex-col bg-surface-2 px-6 py-8 text-ink sm:h-[32vw] sm:px-7 sm:py-9 lg:h-[16.5vw] lg:px-8 lg:py-8 motion-reduce:h-auto motion-reduce:min-h-[18rem]"
+                    className="relative flex h-[17.5rem] flex-col bg-surface-2 px-5 py-5 text-ink sm:h-[16.5rem] sm:px-6 sm:py-6 lg:h-[15.5rem] lg:px-6 lg:py-6"
                   >
                     <Rating value={t.rating} name={t.name} />
-                    <blockquote className="mt-5 min-h-0 flex-1 overflow-hidden text-pretty text-base font-medium leading-relaxed text-ink sm:mt-6 sm:text-lg lg:text-[1.05vw] lg:leading-[1.55] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:5]">
+                    <blockquote className="mt-3 line-clamp-3 flex-1 text-pretty text-sm font-medium leading-snug text-ink sm:mt-4 sm:text-[0.95rem] sm:leading-snug">
                       &ldquo;{t.quote}&rdquo;
                     </blockquote>
-                    <figcaption className="mt-8 flex shrink-0 items-center gap-3 border-t border-hairline/70 pt-6 sm:mt-9 sm:pt-7">
+                    <figcaption className="mt-4 flex shrink-0 items-center gap-2.5 border-t border-hairline/70 pt-4 sm:mt-5 sm:pt-4">
                       {t.image ? (
                         <Image
                           src={t.image}
                           alt=""
-                          width={40}
-                          height={40}
-                          className="h-10 w-10 shrink-0 rounded-full object-cover"
+                          width={36}
+                          height={36}
+                          className="h-9 w-9 shrink-0 rounded-full object-cover"
                         />
                       ) : (
                         <span
                           aria-hidden
-                          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-orange-600/15 text-xs font-semibold tracking-[0.06em] text-orange-600"
+                          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-orange-600/15 text-[0.65rem] font-semibold tracking-[0.06em] text-orange-600"
                         >
                           {initialsOf(t.name)}
                         </span>
                       )}
-                      <span className="text-xs font-medium uppercase tracking-[0.16em] text-ink">
+                      <span className="text-[0.7rem] font-medium uppercase tracking-[0.14em] text-ink">
                         {t.name}
                       </span>
                     </figcaption>

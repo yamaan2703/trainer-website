@@ -62,12 +62,16 @@ export function setupSplitTextReveal({
   // Hash navigation / late layout can leave the trigger already past `start`
   // without playing — finish the reveal so copy never stays hidden.
   queueMicrotask(() => {
-    const st = tl.scrollTrigger;
-    if (!st) {
-      tl.progress(1);
-      return;
-    }
-    if (typeof st.start === "number" && st.scroll() >= st.start) {
+    try {
+      const st = tl.scrollTrigger;
+      if (!st) {
+        tl.progress(1);
+        return;
+      }
+      if (typeof st.start === "number" && st.scroll() >= st.start) {
+        tl.progress(1);
+      }
+    } catch {
       tl.progress(1);
     }
   });

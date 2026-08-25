@@ -65,7 +65,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-12">
           {/* Brand column */}
           <div className="flex flex-col justify-between gap-10 px-6 py-12 sm:px-10 md:col-span-4 md:py-14 lg:px-16 lg:py-16">
-            <a href="#top" className="inline-flex w-fit items-center">
+            <a href="/" className="inline-flex w-fit items-center">
               <Image
                 src="/logo/wordmark-white.png"
                 alt="Cameron Clark Fitness"

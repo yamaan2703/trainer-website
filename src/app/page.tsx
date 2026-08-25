@@ -3,7 +3,6 @@ import { Manifesto } from "@/components/sections/manifesto";
 import { Services } from "@/components/sections/services";
 import { Timeline } from "@/components/sections/timeline";
 import { Story } from "@/components/sections/story";
-import { About } from "@/components/sections/about";
 import { Outcomes } from "@/components/sections/outcomes";
 import { Process } from "@/components/sections/process";
 import { Testimonials } from "@/components/sections/testimonials";
@@ -18,7 +17,6 @@ export default function Home() {
       <Services />
       <Timeline />
       <Story />
-      {/* <About /> */}
       <Outcomes />
       <Process />
       <Testimonials />

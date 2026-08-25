@@ -1,8 +1,11 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { nav, site } from "@/lib/content";
+import { isNavActive } from "@/lib/nav";
+import { cn } from "@/lib/utils";
 import { EASE_OUT } from "@/lib/animations/motion-variants";
 
 interface NavOverlayProps {
@@ -13,6 +16,7 @@ interface NavOverlayProps {
 const FOCUSABLE = 'a[href], button:not([disabled])';
 
 export function NavOverlay({ open, onClose }: NavOverlayProps) {
+  const pathname = usePathname();
   const panelRef = useRef<HTMLDivElement>(null);
   const firstLinkRef = useRef<HTMLAnchorElement>(null);
 
@@ -35,12 +39,12 @@ export function NavOverlay({ open, onClose }: NavOverlayProps) {
 
       const first = focusable[0];
       const last = focusable[focusable.length - 1];
-      const active = document.activeElement;
+      const focused = document.activeElement;
 
-      if (e.shiftKey && active === first) {
+      if (e.shiftKey && focused === first) {
         e.preventDefault();
         last.focus();
-      } else if (!e.shiftKey && active === last) {
+      } else if (!e.shiftKey && focused === last) {
         e.preventDefault();
         first.focus();
       }
@@ -70,27 +74,45 @@ export function NavOverlay({ open, onClose }: NavOverlayProps) {
         >
           <div className="container-edit flex flex-1 flex-col pt-28 pb-10 sm:pt-32">
             <nav className="flex flex-1 flex-col justify-center gap-1 sm:gap-2">
-              {nav.map((item, i) => (
-                <motion.div
-                  key={item.href}
-                  initial={{ opacity: 0, y: 24 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.15 + i * 0.05, duration: 0.5, ease: EASE_OUT }}
-                  className="flex items-baseline gap-4 border-b border-lime-ink/15 py-3 sm:py-4"
-                >
-                  <span className="font-mono text-xs text-lime-ink/50">
-                    0{i + 1}
-                  </span>
-                  <a
-                    ref={i === 0 ? firstLinkRef : undefined}
-                    href={item.href}
-                    onClick={onClose}
-                    className="group text-[13vw] leading-[0.95] font-black uppercase tracking-tight transition-colors hover:text-cream sm:text-[6vw]"
+              {nav.map((item, i) => {
+                const active = isNavActive({ href: item.href, pathname });
+
+                return (
+                  <motion.div
+                    key={item.href}
+                    initial={{ opacity: 0, y: 24 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      delay: 0.15 + i * 0.05,
+                      duration: 0.5,
+                      ease: EASE_OUT,
+                    }}
+                    className="flex items-baseline gap-4 border-b border-lime-ink/15 py-3 sm:py-4"
                   >
-                    {item.label}
-                  </a>
-                </motion.div>
-              ))}
+                    <span
+                      className={cn(
+                        "font-mono text-xs",
+                        active ? "text-cream" : "text-lime-ink/50"
+                      )}
+                    >
+                      0{i + 1}
+                    </span>
+                    <a
+                      ref={i === 0 ? firstLinkRef : undefined}
+                      href={item.href}
+                      onClick={onClose}
+                      aria-current={active ? "page" : undefined}
+                      data-active={active ? "true" : undefined}
+                      className={cn(
+                        "group text-[13vw] leading-[0.95] font-black uppercase tracking-tight transition-colors sm:text-[6vw]",
+                        active ? "text-cream" : "hover:text-cream"
+                      )}
+                    >
+                      {item.label}
+                    </a>
+                  </motion.div>
+                );
+              })}
             </nav>
 
             <motion.div
@@ -103,10 +125,16 @@ export function NavOverlay({ open, onClose }: NavOverlayProps) {
                 <p className="text-xs uppercase tracking-[0.2em] text-lime-ink/60">
                   Get in touch
                 </p>
-                <a href={site.emailHref} className="mt-1 block font-medium hover:underline">
+                <a
+                  href={site.emailHref}
+                  className="mt-1 block font-medium hover:underline"
+                >
                   {site.email}
                 </a>
-                <a href={site.phoneHref} className="mt-1 block font-medium hover:underline">
+                <a
+                  href={site.phoneHref}
+                  className="mt-1 block font-medium hover:underline"
+                >
                   {site.phone}
                 </a>
               </div>

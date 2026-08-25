@@ -11,7 +11,7 @@ export const site = {
   phone: "650-776-0600",
   phoneHref: "tel:6507760600",
   emailHref: "mailto:cameron@cameronclarkfitness.com?subject=Contact",
-  discoveryCallHref: "#contact",
+  discoveryCallHref: "/#contact",
   social: [
     {
       label: "Facebook",
@@ -33,11 +33,9 @@ export const site = {
 
 /** Desktop/horizontal nav — labels mirror the reference hero composition. */
 export const nav = [
-  { label: "Home", href: "#top" },
-  { label: "About", href: "#about" },
-  { label: "How It Works", href: "#process" },
-  { label: "Results", href: "#results" },
-  { label: "Testimonials", href: "#testimonials" },
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
+  { label: "Services", href: "/service" },
 ];
 
 export const hero = {
@@ -154,13 +152,82 @@ export const services = [
   },
 ];
 
+/** Full Services page copy — from cameronclarkfitness.com/service. */
+export const servicesPage = {
+  hero: {
+    eyebrow: "Services",
+    headingLines: ["Programs That", "Fit Your Life"],
+    body: "Whether you need a full rebuild or a quick tune-up, Cameron Clark offers two coaching programs built around your goals, schedule, and lifestyle.",
+  },
+  programs: [
+    {
+      id: "elevated",
+      index: "01",
+      eyebrow: "Online Coaching",
+      heading: "The Elevated Professional Program",
+      body: "A complete restoration for professionals ready to reclaim peak performance with custom training, nutrition, and high-touch support.",
+      features: [
+        {
+          title: "Complete Diagnostic & Custom Build",
+          description:
+            "From sleep to schedule, every detail is rebuilt with precision, like restoring a performance vehicle from the ground up.",
+        },
+        {
+          title: "Ongoing Optimization & Expert Access",
+          description:
+            "Weekly check-ins and direct access to Cameron keep your plan evolving and results consistent.",
+        },
+      ],
+      cta: "Dive Deeper",
+      ctaHref: "/#contact",
+      image: "/images/service-online.png",
+      imageAlt: "Online coaching with Cameron Clark",
+      reverse: false,
+    },
+    {
+      id: "in-person",
+      index: "02",
+      eyebrow: "In-Person",
+      heading: "Tailored In-Person Training",
+      body: "Hands-on coaching for professionals who want real-time adjustments and efficient sessions that fit a demanding schedule.",
+      features: [
+        {
+          title: "Hands-on Precision",
+          description:
+            "Expert feedback to fine-tune form and maximize results every session.",
+        },
+        {
+          title: "Custom Workouts that Fit Your Life",
+          description:
+            "Plans designed for your goals and needs, no cookie-cutter templates.",
+        },
+      ],
+      cta: "Explore this program",
+      ctaHref: "/#contact",
+      image: "/images/service-in-person.png",
+      imageAlt: "In-person training with Cameron Clark",
+      reverse: true,
+    },
+  ],
+  cta: {
+    heading: "Experience What Peak Performance Feels Like Again",
+    headingLines: [
+      "Experience What",
+      "Peak Performance",
+      "Feels Like Again",
+    ],
+    body: "You don't need to trade yourself in, you need the right mechanic. Cameron's programs are efficient, precise, and built to keep you driving forward stronger than before.",
+    cta: "Book a Discovery Call",
+  },
+};
+
 export const story = {
   // Palomino-style split: label + body + CTA on the left, full-bleed
   // portrait image on the right with a center clip-path open on scroll.
   eyebrow: "Our Story",
   body: "When Cameron hangs up the coaching hat, you'll find him embracing his most important role: girl dad. And then there's the garage, the place where classic British cars wait for his hands and his patience. To Cameron, each restoration tells a story — you don't rush the process, you honor the craftsmanship, and you bring something timeless back to life.",
   cta: "About us",
-  ctaHref: "#about",
+  ctaHref: "/about",
   image: "/images/story-daughter.jpg",
   imageAlt: "Cameron Clark with his daughter",
 };
@@ -236,19 +303,19 @@ export const process = {
 export const testimonials = [
   {
     quote:
-      "I've seen major improvements in my core strength and stamina. Cameron always delivers great workouts and solid advice that keeps me progressing.",
+      "Major improvements in my core strength and stamina. Cameron always delivers great workouts and solid advice.",
     name: "Hansol L.",
     rating: 5,
   },
   {
     quote:
-      "Cameron is an excellent coach who motivates me to do my best and has helped me improve my overall fitness and core strength.",
+      "Cameron motivates me to do my best and has helped me improve my overall fitness and core strength.",
     name: "Flora",
     rating: 5,
   },
   {
     quote:
-      "I have had a great experience working with Cameron, very helpful and patient about current goals and abilities and tailors his approach in a very understanding way.",
+      "Very helpful and patient about my goals. He tailors his approach in a clear, understanding way.",
     name: "Jake S.",
     rating: 5,
   },
@@ -259,13 +326,13 @@ export const testimonials = [
   },
   {
     quote:
-      "I am very happy. I wasn't very motivated to go to the gym, but now thanks to Cameron I understand how I can use the equipment and how to create an effective exercise routine.",
+      "I wasn't motivated to go to the gym — now I know how to train effectively thanks to Cameron.",
     name: "Renzo F.",
     rating: 5,
   },
   {
     quote:
-      "Training with Cameron is awesome (and don't get me wrong, tough, but that's what you want right)! After a quick consultation he put together a custom routine that will push you in ways you just can't and won't push yourself.",
+      "Tough in the best way. Cameron built a custom routine that pushes me harder than I'd push myself.",
     name: "Will James Johnson",
     rating: 5,
     image: "/images/testimonial-will.jpg",
@@ -313,19 +380,168 @@ export const about = {
   servesWho: [
     {
       title: "Medical Professionals and Tech Executives",
-      description: "Whose high-performance careers have left their bodies running on fumes.",
+      description:
+        "Whose high-performance careers have left their bodies running on fumes.",
     },
     {
       title: "Successful Parents and High Achievers",
-      description: "Who refuse to accept that their chassis has to deteriorate with mileage.",
+      description:
+        "Who refuse to accept that their chassis has to deteriorate with mileage.",
     },
   ],
   values: [
-    { title: "Do It Right", description: "No shortcuts, just precision, smart systems, and results that last." },
-    { title: "People Over Protocols", description: "Clients are whole people, not just numbers or reps." },
-    { title: "Care Loudly", description: "Real care shows up in every check-in and adjustment." },
-    { title: "Work With Reality", description: "Programs fit real lives, demanding schedules, and shifting priorities." },
+    {
+      title: "Do It Right",
+      description:
+        "No shortcuts, just precision, smart systems, and results that last.",
+    },
+    {
+      title: "People Over Protocols",
+      description: "Clients are whole people, not just numbers or reps.",
+    },
+    {
+      title: "Care Loudly",
+      description: "Real care shows up in every check-in and adjustment.",
+    },
+    {
+      title: "Work With Reality",
+      description:
+        "Programs fit real lives, demanding schedules, and shifting priorities.",
+    },
   ],
+};
+
+/** Full About page copy — from cameronclarkfitness.com/about. */
+export const aboutPage = {
+  hero: {
+    eyebrow: "About",
+    heading: "Meet Cameron Clark",
+    image: "/images/deadlift.png",
+    imageAlt: "Cameron Clark powerlifting at a national championship",
+  },
+  origin: {
+    eyebrow: "Origin",
+    heading: "How Cameron Found His Drive",
+    subheading: "From a $500 Paycheck to Life-Changing Rebuilds",
+    paragraphs: [
+      "Cameron didn't enter the fitness industry chasing six-figure success, he started with a $500 month and a client most had written off. But that first transformation lit the spark. It taught him that coaching isn't about hype or hacks, it's about helping people reclaim their strength when it matters most.",
+      "What began as a passion quickly became a purpose: to help high performers rebuild their bodies and their confidence with the same care, strategy, and precision they bring to every other part of life.",
+    ],
+    cta: "Let's Build Your Plan Together",
+    ctaHref: "/#contact",
+  },
+  beyond: {
+    eyebrow: "Life Off the Floor",
+    heading: "Beyond the Training Floor",
+    paragraphs: [
+      "When he's not coaching, Cameron's focused on being a present and energetic girl dad, living proof that strength, vitality, and parenthood can thrive together. He models the very habits he helps clients build.",
+      "His other passion? Classic British cars. Cameron's love for vintage automobiles is a philosophy that permeates his approach to fitness. Like rebuilding a vintage vehicle, transforming your body takes patience, quality inputs, and expert care. Whether under the hood or in the gym, Cameron believes real performance comes from doing things right and not rushing the process.",
+    ],
+    image: "/images/story-daughter.jpg",
+    imageAlt: "Cameron Clark with his daughter",
+    audiences: [
+      {
+        title: "Medical Professionals and Tech Executives",
+        description:
+          "Whose high-performance careers have left their bodies running on fumes.",
+      },
+      {
+        title: "Successful Parents and High Achievers",
+        description:
+          "Who refuse to accept that their chassis has to deteriorate with mileage.",
+      },
+    ],
+  },
+  roadmap: {
+    eyebrow: "Direction",
+    heading: "The Roadmap Guiding Us",
+    mission: {
+      title: "Our Mission",
+      body: "To help high-achieving professionals reclaim their physical performance through efficient, personalized coaching, like a custom rebuild that fits your engine, your mileage, and your life.",
+    },
+    vision: {
+      title: "Our Vision",
+      body: "A world where leaders never have to sacrifice their health to stay in motion, where strength, energy, and confidence are maintained like a well-kept machine, year after year.",
+    },
+  },
+  values: {
+    eyebrow: "Values",
+    heading: "Our Core Values",
+    items: [
+      {
+        title: "Do It Right",
+        description:
+          "No shortcuts, just precision, smart systems, and results that last.",
+      },
+      {
+        title: "People Over Protocols",
+        description: "Clients are whole people, not just numbers or reps.",
+      },
+      {
+        title: "Care Loudly",
+        description: "Real care shows up in every check-in and adjustment.",
+      },
+      {
+        title: "Work With Reality",
+        description:
+          "Programs fit real lives, demanding schedules, and shifting priorities.",
+      },
+      {
+        title: "Keep the Fundamentals",
+        description:
+          "Consistency, quality movement, and sustainable change always come first.",
+      },
+      {
+        title: "Every Client Is a Project Worth Finishing",
+        description:
+          "Each client's transformation is treated like a high-value rebuild.",
+      },
+    ],
+  },
+  different: {
+    eyebrow: "Difference",
+    heading: "What Makes Cameron Clark Different",
+    intro:
+      "What sets Cameron apart isn't just his expertise, it's how much he cares. Clients trust him because he's real, responsive, and fully invested in their progress.",
+    items: [
+      {
+        title: "Understands High-Performance Demands",
+        description:
+          "He knows the toll of pressure and what breaks down without proper maintenance.",
+      },
+      {
+        title: "Speaks the Language of Success",
+        description:
+          "High performers need plans that match their unique schedules.",
+      },
+      {
+        title: "Master Technician",
+        description:
+          "Every program is precise, tailored, and free of cookie-cutter templates.",
+      },
+      {
+        title: "Delivers the Real Diagnosis",
+        description:
+          "Straight, honest feedback with lasting solutions, not quick fixes.",
+      },
+      {
+        title: "Boutique Service",
+        description:
+          "A limited client load ensures premium, hands-on coaching.",
+      },
+      {
+        title: "Lives What He Teaches",
+        description:
+          "As a dad and car enthusiast, he applies the same high-performance mindset to life.",
+      },
+    ],
+  },
+  cta: {
+    heading: "Ready to Get Back in the Driver's Seat?",
+    headingLines: ["Ready to Get Back", "in the Driver's", "Seat?"],
+    body: "If you're done with quick fixes and ready for a smarter approach, let's talk. This no-pressure call is your first step toward rebuilding strength, energy, and control, on your terms.",
+    cta: "Book a Discovery Call",
+  },
 };
 
 export const finalCta = {
