@@ -59,6 +59,19 @@ export function setupSplitTextReveal({
     tl.to(lines, { yPercent: 0, duration: 0.95, stagger: 0.06 }, 0.28);
   }
 
+  // Hash navigation / late layout can leave the trigger already past `start`
+  // without playing — finish the reveal so copy never stays hidden.
+  queueMicrotask(() => {
+    const st = tl.scrollTrigger;
+    if (!st) {
+      tl.progress(1);
+      return;
+    }
+    if (typeof st.start === "number" && st.scroll() >= st.start) {
+      tl.progress(1);
+    }
+  });
+
   return () => {
     splits.forEach((split) => split.revert());
   };

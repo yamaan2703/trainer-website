@@ -273,16 +273,14 @@ export function Process() {
                         className="flex w-full min-w-0 items-baseline gap-4 py-6 text-left sm:gap-5 sm:py-7"
                       >
                         <span
-                          className={`shrink-0 font-mono text-sm tracking-tight transition-colors duration-300 ${
-                            isActive ? "text-orange-600" : "text-ink-muted/55"
-                          }`}
+                          className={`shrink-0 font-mono text-sm tracking-tight transition-colors duration-300 ${isActive ? "text-orange-600" : "text-ink-muted/55"
+                            }`}
                         >
                           {step.index}
                         </span>
                         <span
-                          className={`min-w-0 flex-1 break-words text-[clamp(1.45rem,5.5cqi,2.15rem)] font-semibold tracking-tight transition-colors duration-300 ${
-                            isActive ? "text-ink" : "text-ink-muted/55"
-                          }`}
+                          className={`min-w-0 flex-1 break-words text-[clamp(1.45rem,5.5cqi,2.15rem)] font-semibold tracking-tight transition-colors duration-300 ${isActive ? "text-ink" : "text-ink-muted/55"
+                            }`}
                         >
                           {step.title}
                         </span>
