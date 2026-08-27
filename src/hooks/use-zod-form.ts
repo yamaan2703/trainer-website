@@ -4,40 +4,28 @@ import {
   useForm,
   type UseFormProps,
   type FieldValues,
+  type Resolver,
 } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { z } from "zod";
 
 /**
- * `useForm` pre-wired to a Zod schema via `zodResolver`, so form components
- * never have to import the resolver themselves and every form in the app
- * validates the same way.
- *
- * Both `Input` (the raw values `register`/`watch`/`defaultValues` work with)
- * and `Output` (what `handleSubmit`'s callback receives, i.e. the schema's
- * parsed/transformed result) are inferred from `schema` itself, so a schema
- * using `.transform()` is still typed correctly end to end — not just
- * schemas where input and output happen to match.
- *
- * Caveat: a *top-level* `z.coerce.xxx()` field (e.g. `z.coerce.number()`
- * directly on an object property) types that field's Input as `unknown`,
- * which TypeScript won't accept here. Use `z.string().transform(Number)`
- * instead — same runtime effect, and it stays typed.
- *
- * @example
- * const schema = z.object({ email: z.string().email() });
- * const form = useZodForm(schema, { defaultValues: { email: "" } });
+ * `useForm` pre-wired to a Zod schema via `zodResolver`.
+ * Infers Input/Output from the schema (Zod 4–compatible).
  */
-export function useZodForm<
-  Output extends FieldValues,
-  Input extends FieldValues = Output,
-  Schema extends z.ZodType<Output, Input> = z.ZodType<Output, Input>
->(
-  schema: Schema,
-  options?: Omit<UseFormProps<Input, unknown, Output>, "resolver">
+export function useZodForm<TSchema extends z.ZodType<FieldValues, FieldValues>>(
+  schema: TSchema,
+  options?: Omit<
+    UseFormProps<z.input<TSchema>, unknown, z.output<TSchema>>,
+    "resolver"
+  >
 ) {
-  return useForm<Input, unknown, Output>({
-    resolver: zodResolver(schema),
+  return useForm<z.input<TSchema>, unknown, z.output<TSchema>>({
+    resolver: zodResolver(schema) as unknown as Resolver<
+      z.input<TSchema>,
+      unknown,
+      z.output<TSchema>
+    >,
     mode: "onBlur",
     ...options,
   });
