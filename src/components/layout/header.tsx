@@ -99,7 +99,7 @@ export function Header() {
 
             <a
               href={site.discoveryCallHref}
-              className="inline-flex items-center bg-orange-600 px-3.5 py-2 text-[0.6875rem] font-bold uppercase tracking-[0.12em] text-lime-ink transition-colors hover:bg-white sm:px-5 sm:py-2.5 sm:text-xs"
+              className="btn-cta px-3.5 py-2 text-[0.6875rem] sm:px-5 sm:py-2.5 sm:text-xs"
             >
               Discovery Call
             </a>

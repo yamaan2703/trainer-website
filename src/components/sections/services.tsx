@@ -1,10 +1,11 @@
 "use client";
 
-import { useRef, type ReactNode } from "react";
+import { useRef } from "react";
 import Image from "next/image";
 import { services, servicesIntro } from "@/lib/content";
 import { Container } from "@/components/layout/container";
 import { Eyebrow } from "@/components/shared/eyebrow";
+import { TextCtaLink } from "@/components/shared/text-cta-link";
 import { Reveal } from "@/components/motion/reveal";
 import { useGsap } from "@/hooks/use-gsap";
 import { gsap, ScrollTrigger, SplitText } from "@/lib/animations/gsap";
@@ -15,46 +16,6 @@ import { gsap, ScrollTrigger, SplitText } from "@/lib/animations/gsap";
  * and the ScrollTrigger `end` are derived from it.
  */
 const STACK_STEP = 18;
-
-/**
- * Link with a rolling label swap on hover — a second copy sits directly below
- * the first inside a masked box and both slide up together. Local to this
- * section; the page-level CTA remains `CtaLink`.
- */
-function ServiceLink({
-  href,
-  children,
-  className = "",
-}: {
-  href: string;
-  children: ReactNode;
-  className?: string;
-}) {
-  return (
-    <a
-      href={href}
-      className={`group/link inline-flex w-fit items-center gap-2.5 text-xs uppercase tracking-[0.14em] text-ink sm:text-[0.8125rem] ${className}`}
-    >
-      <span className="relative block overflow-hidden">
-        <span className="block transition-transform duration-[600ms] ease-[cubic-bezier(0.65,0,0.35,1)] group-hover/link:-translate-y-full">
-          {children}
-        </span>
-        <span
-          aria-hidden
-          className="absolute left-0 top-0 block translate-y-full text-orange-600 transition-transform duration-[600ms] ease-[cubic-bezier(0.65,0,0.35,1)] group-hover/link:translate-y-0"
-        >
-          {children}
-        </span>
-      </span>
-      <span
-        aria-hidden
-        className="transition-transform duration-[600ms] ease-[cubic-bezier(0.65,0,0.35,1)] group-hover/link:translate-x-1.5"
-      >
-        &rarr;
-      </span>
-    </a>
-  );
-}
 
 function ServiceCard({
   service,
@@ -125,7 +86,7 @@ function ServiceCard({
         </div>
 
         <div data-card-foot className="mt-10">
-          <ServiceLink href="#contact">{service.cta}</ServiceLink>
+          <TextCtaLink href="#contact">{service.cta}</TextCtaLink>
         </div>
       </div>
 
@@ -155,7 +116,7 @@ function ServiceCard({
           <p className="text-xs uppercase tracking-[0.18em] text-ink-muted">
             <span className="text-orange-600">{service.stat}</span> &mdash; {service.statLabel}
           </p>
-          <ServiceLink href="#contact">Contact us</ServiceLink>
+          <TextCtaLink href="#contact">Contact us</TextCtaLink>
         </div>
       </div>
     </article>

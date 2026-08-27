@@ -196,7 +196,7 @@ export function Hero() {
             </p>
             <a
               href={site.discoveryCallHref}
-              className="inline-flex items-center bg-orange-600 px-5 py-2.5 text-xs font-bold uppercase tracking-[0.12em] text-lime-ink transition-colors hover:bg-white sm:px-7 sm:py-3 sm:text-sm"
+              className="btn-cta px-5 py-2.5 text-xs sm:px-7 sm:py-3 sm:text-sm"
             >
               {hero.cta}
             </a>

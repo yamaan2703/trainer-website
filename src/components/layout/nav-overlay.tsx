@@ -141,7 +141,7 @@ export function NavOverlay({ open, onClose }: NavOverlayProps) {
               <a
                 href={site.discoveryCallHref}
                 onClick={onClose}
-                className="inline-flex w-fit items-center bg-lime-ink px-5 py-2.5 text-xs font-bold uppercase tracking-[0.12em] text-cream transition-colors hover:bg-lime-ink/90"
+                className="inline-flex w-fit items-center bg-lime-ink px-5 py-2.5 text-xs font-bold uppercase tracking-[0.12em] text-cream transition-colors duration-300 hover:bg-white hover:text-lime-ink"
               >
                 Discovery Call
               </a>

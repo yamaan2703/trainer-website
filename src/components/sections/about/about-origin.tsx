@@ -67,7 +67,7 @@ export function AboutOrigin() {
               <a
                 data-split-meta
                 href={aboutPage.origin.ctaHref}
-                className="mt-8 inline-flex w-fit items-center bg-orange-600 px-5 py-2.5 text-xs font-bold uppercase tracking-[0.12em] text-lime-ink transition-colors hover:bg-white sm:mt-10"
+                className="btn-cta mt-8 w-fit px-5 py-2.5 text-xs sm:mt-10"
               >
                 {aboutPage.origin.cta}
               </a>

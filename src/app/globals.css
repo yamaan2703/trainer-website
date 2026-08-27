@@ -199,6 +199,31 @@
     content: "";
     @apply block h-[5px] w-[5px] shrink-0 bg-orange-600;
   }
+
+  /**
+   * Primary CTA — orange in both themes.
+   * Hover tracks --theme-t: dark (0) → white/black, light (1) → black/white.
+   */
+  .btn-cta {
+    @apply inline-flex items-center justify-center bg-orange-600 font-bold uppercase tracking-[0.12em] text-lime-ink;
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
+  }
+
+  .btn-cta:hover,
+  .btn-cta:focus-visible {
+    background-color: color-mix(
+      in oklab,
+      #ffffff,
+      #000000 calc(var(--theme-t) * 100%)
+    );
+    color: color-mix(
+      in oklab,
+      #000000,
+      #ffffff calc(var(--theme-t) * 100%)
+    );
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

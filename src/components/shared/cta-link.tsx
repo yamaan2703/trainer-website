@@ -49,10 +49,10 @@ export function CtaLink({ href, children, variant = "solid", className }: CtaLin
       onMouseLeave={reset}
       style={prefersReducedMotion ? undefined : { x: springX, y: springY }}
       className={cn(
-        "group inline-flex w-fit items-center gap-3 px-7 py-4 text-sm font-semibold uppercase tracking-[0.08em] transition-colors",
-        variant === "solid" && "bg-orange-600 text-lime-ink hover:bg-orange-600/90",
+        "group inline-flex w-fit items-center gap-3 px-7 py-4 text-sm font-semibold uppercase tracking-[0.08em]",
+        variant === "solid" && "btn-cta",
         variant === "outline" &&
-        "border border-hairline text-ink hover:border-orange-600 hover:text-orange-600",
+          "border border-hairline text-ink transition-colors hover:border-orange-600 hover:text-orange-600",
         className
       )}
     >

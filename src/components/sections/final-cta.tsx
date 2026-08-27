@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { finalCta, footer, site } from "@/lib/content";
 import { Container } from "@/components/layout/container";
+import { TextCtaLink } from "@/components/shared/text-cta-link";
 import { useGsap } from "@/hooks/use-gsap";
 import { gsap } from "@/lib/animations/gsap";
 import { setupSplitTextReveal } from "@/lib/animations/split-text-reveal";
@@ -75,19 +76,14 @@ export function FinalCta({ content = finalCta }: FinalCtaProps) {
             >
               {content.body}
             </p>
-            <a
+            <TextCtaLink
               data-split-meta
               href={site.discoveryCallHref}
-              className="group mt-10 inline-flex w-fit items-center gap-2.5 text-sm font-semibold uppercase tracking-[0.12em] text-ink transition-colors duration-300 hover:text-orange-600"
+              arrow="↗"
+              className="mt-10 text-sm font-semibold tracking-[0.12em] sm:text-sm"
             >
               {content.cta}
-              <span
-                aria-hidden
-                className="inline-block transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-              >
-                ↗
-              </span>
-            </a>
+            </TextCtaLink>
           </div>
         </div>
       </Container>

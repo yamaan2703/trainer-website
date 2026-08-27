@@ -1,8 +1,9 @@
 "use client";
 
-import { useRef, type ReactNode } from "react";
+import { useRef } from "react";
 import Image from "next/image";
 import { story } from "@/lib/content";
+import { TextCtaLink } from "@/components/shared/text-cta-link";
 import { useGsap } from "@/hooks/use-gsap";
 import { gsap, SplitText } from "@/lib/animations/gsap";
 
@@ -12,39 +13,6 @@ import { gsap, SplitText } from "@/lib/animations/gsap";
  * center clip-path (inset 50% → 0%) while scaling 1.2 → 1. Body copy
  * reveals line-by-line through SplitText masks.
  */
-
-function StoryLink({
-  href,
-  children,
-}: {
-  href: string;
-  children: ReactNode;
-}) {
-  return (
-    <a
-      href={href}
-      className="group/link inline-flex w-fit items-center gap-2.5 text-xs uppercase tracking-[0.14em] text-ink sm:text-[0.8125rem]"
-    >
-      <span className="relative block overflow-hidden">
-        <span className="block transition-transform duration-[600ms] ease-[cubic-bezier(0.65,0,0.35,1)] group-hover/link:-translate-y-full">
-          {children}
-        </span>
-        <span
-          aria-hidden
-          className="absolute left-0 top-0 block translate-y-full text-orange-600 transition-transform duration-[600ms] ease-[cubic-bezier(0.65,0,0.35,1)] group-hover/link:translate-y-0"
-        >
-          {children}
-        </span>
-      </span>
-      <span
-        aria-hidden
-        className="transition-transform duration-[600ms] ease-[cubic-bezier(0.65,0,0.35,1)] group-hover/link:translate-x-1.5"
-      >
-        &rarr;
-      </span>
-    </a>
-  );
-}
 
 export function Story() {
   const root = useRef<HTMLDivElement>(null);
@@ -157,7 +125,7 @@ export function Story() {
             </p>
 
             <div data-story-meta>
-              <StoryLink href={story.ctaHref}>{story.cta}</StoryLink>
+              <TextCtaLink href={story.ctaHref}>{story.cta}</TextCtaLink>
             </div>
           </div>
 

@@ -123,7 +123,7 @@ export function Footer() {
               </p>
               <a
                 href={site.discoveryCallHref}
-                className="mt-5 inline-flex px-2.5 py-1.5 text-sm font-medium text-white transition-colors duration-300 hover:bg-orange-600"
+                className="btn-cta mt-5 px-3 py-2 text-sm"
               >
                 Book a Discovery Call →
               </a>

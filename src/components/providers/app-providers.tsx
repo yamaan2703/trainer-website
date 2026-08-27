@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 import { SmoothScrollProvider } from "@/components/providers/smooth-scroll-provider";
 import { MotionProvider } from "@/components/providers/motion-provider";
 import { ThemeTransition } from "@/components/providers/theme-transition";
+import { PageTransitionLoader } from "@/components/loader/page-transition-loader";
 
 /**
  * Single composition point for every client-side provider the app needs
@@ -15,6 +16,7 @@ export function AppProviders({ children }: { children: ReactNode }) {
     <SmoothScrollProvider>
       <MotionProvider>
         <ThemeTransition />
+        <PageTransitionLoader />
         {children}
       </MotionProvider>
     </SmoothScrollProvider>

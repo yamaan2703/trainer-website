@@ -5,6 +5,7 @@ import Image from "next/image";
 import { process } from "@/lib/content";
 import { Container } from "@/components/layout/container";
 import { Eyebrow } from "@/components/shared/eyebrow";
+import { TextCtaLink } from "@/components/shared/text-cta-link";
 import { useGsap } from "@/hooks/use-gsap";
 import { gsap } from "@/lib/animations/gsap";
 import { setupSplitTextReveal } from "@/lib/animations/split-text-reveal";
@@ -301,15 +302,13 @@ export function Process() {
                           <p className="text-base leading-relaxed text-ink-muted sm:text-[1.05rem]">
                             {step.description}
                           </p>
-                          <a
+                          <TextCtaLink
                             href={step.ctaHref}
-                            className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-ink transition-colors hover:text-orange-600"
+                            arrow="↗"
+                            className="mt-5 text-sm font-medium tracking-normal normal-case sm:text-sm"
                           >
                             {step.cta}
-                            <span aria-hidden className="text-orange-600">
-                              ↗
-                            </span>
-                          </a>
+                          </TextCtaLink>
                         </div>
                       </div>
                     </div>
