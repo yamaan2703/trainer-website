@@ -154,12 +154,20 @@ export function Footer() {
             © {year} {site.name}
           </p>
           <p className="sm:text-center">{footer.credit}</p>
-          <a
-            href={site.emailHref}
-            className="transition-colors duration-300 hover:text-white sm:text-right"
+          <nav
+            aria-label="Legal"
+            className="flex flex-wrap gap-x-4 gap-y-1 sm:justify-end"
           >
-            {site.email}
-          </a>
+            {footer.legal.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="transition-colors duration-300 hover:text-white"
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
         </div>
       </Container>
     </footer>

@@ -47,8 +47,11 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${robotoCondensed.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col bg-background text-foreground">
+    <html
+      lang="en"
+      className={`${robotoCondensed.variable} h-full font-sans antialiased`}
+    >
+      <body className="flex min-h-full flex-col bg-background font-sans text-foreground">
         <Preloader />
         <AppProviders>
           <Header />
