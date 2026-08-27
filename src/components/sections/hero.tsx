@@ -24,14 +24,6 @@ interface SocialIconProps {
   className?: string;
 }
 
-function FacebookIcon({ className }: SocialIconProps) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden className={className}>
-      <path d="M14 13.5h2.5l1-4H14v-2c0-1.03 0-2 2-2h1.5V2.14C17.17 2.09 15.9 2 14.5 2 11.6 2 9.5 3.79 9.5 7.15V9.5H7v4h2.5V22h4.5z" />
-    </svg>
-  );
-}
-
 function InstagramIcon({ className }: SocialIconProps) {
   return (
     <svg
@@ -49,21 +41,47 @@ function InstagramIcon({ className }: SocialIconProps) {
   );
 }
 
-function LinkedinIcon({ className }: SocialIconProps) {
+function MailIcon({ className }: SocialIconProps) {
   return (
-    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden className={className}>
-      <path d="M6.94 8.5H3.75V21h3.19V8.5zM5.34 3A1.84 1.84 0 1 0 5.35 6.68 1.84 1.84 0 0 0 5.34 3zM20.25 21h-3.18v-6.59c0-1.84-.74-2.87-2.16-2.87-1.59 0-2.42 1.07-2.42 2.87V21H9.31V8.5h3.05v1.5c.52-.9 1.68-1.74 3.55-1.74 2.77 0 4.34 1.79 4.34 5.2V21z" />
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      aria-hidden
+      className={className}
+    >
+      <rect x="3" y="5" width="18" height="14" rx="1.5" />
+      <path d="m4 7 8 6 8-6" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
 
-const SOCIAL_ICONS: Record<
-  (typeof site.social)[number]["network"],
+function PhoneIcon({ className }: SocialIconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      aria-hidden
+      className={className}
+    >
+      <path
+        d="M8.5 4.5h3l1 4.5-2 1.5a12 12 0 0 0 5 5l1.5-2 4.5 1v3a2 2 0 0 1-2 2A14.5 14.5 0 0 1 4.5 6.5a2 2 0 0 1 2-2Z"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+const HERO_RAIL_ICONS: Record<
+  (typeof site.heroRail)[number]["network"],
   (props: SocialIconProps) => ReactNode
 > = {
-  facebook: FacebookIcon,
   instagram: InstagramIcon,
-  linkedin: LinkedinIcon,
+  email: MailIcon,
+  phone: PhoneIcon,
 };
 
 export function Hero() {
@@ -97,19 +115,21 @@ export function Hero() {
       id="top"
       className="relative h-dvh min-h-[640px] overflow-hidden bg-black"
     >
-      {/* Left social rail — desktop only. */}
+      {/* Left contact rail — desktop only. */}
       <div
         data-hero-fade
         className="absolute left-6 top-1/2 z-30 hidden -translate-y-1/2 flex-col items-center gap-5 lg:flex xl:left-10"
       >
-        {site.social.map((item) => {
-          const Icon = SOCIAL_ICONS[item.network];
+        {site.heroRail.map((item) => {
+          const Icon = HERO_RAIL_ICONS[item.network];
+          const isExternal = item.href.startsWith("http");
           return (
             <a
               key={item.network}
               href={item.href}
-              target="_blank"
-              rel="noopener noreferrer"
+              {...(isExternal
+                ? { target: "_blank", rel: "noopener noreferrer" }
+                : {})}
               aria-label={item.label}
               className="text-slate-100 transition-colors hover:text-orange-600"
             >

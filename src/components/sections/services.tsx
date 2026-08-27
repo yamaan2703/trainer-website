@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import Image from "next/image";
-import { services, servicesIntro } from "@/lib/content";
+import { services, servicesIntro, site } from "@/lib/content";
 import { Container } from "@/components/layout/container";
 import { Eyebrow } from "@/components/shared/eyebrow";
 import { TextCtaLink } from "@/components/shared/text-cta-link";
@@ -86,7 +86,7 @@ function ServiceCard({
         </div>
 
         <div data-card-foot className="mt-10">
-          <TextCtaLink href="#contact">{service.cta}</TextCtaLink>
+          <TextCtaLink href={site.discoveryCallHref}>{service.cta}</TextCtaLink>
         </div>
       </div>
 
@@ -116,7 +116,7 @@ function ServiceCard({
           <p className="text-xs uppercase tracking-[0.18em] text-ink-muted">
             <span className="text-orange-600">{service.stat}</span> &mdash; {service.statLabel}
           </p>
-          <TextCtaLink href="#contact">Contact us</TextCtaLink>
+          <TextCtaLink href={site.discoveryCallHref}>Contact us</TextCtaLink>
         </div>
       </div>
     </article>

@@ -11,7 +11,7 @@ export const site = {
   phone: "650-776-0600",
   phoneHref: "tel:6507760600",
   emailHref: "mailto:cameron@cameronclarkfitness.com?subject=Contact",
-  discoveryCallHref: "/#contact",
+  discoveryCallHref: "/contact",
   social: [
     {
       label: "Facebook",
@@ -29,6 +29,24 @@ export const site = {
       network: "linkedin" as const,
     },
   ],
+  /** Left rail on the homepage hero — Instagram + direct contact. */
+  heroRail: [
+    {
+      label: "Instagram",
+      href: "https://www.instagram.com/cameronclarkfitness/",
+      network: "instagram" as const,
+    },
+    {
+      label: "Email",
+      href: "mailto:cameron@cameronclarkfitness.com?subject=Contact",
+      network: "email" as const,
+    },
+    {
+      label: "Call",
+      href: "tel:6507760600",
+      network: "phone" as const,
+    },
+  ],
 };
 
 /** Desktop/horizontal nav — labels mirror the reference hero composition. */
@@ -36,6 +54,7 @@ export const nav = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Services", href: "/service" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export const hero = {
@@ -179,7 +198,7 @@ export const servicesPage = {
         },
       ],
       cta: "Dive Deeper",
-      ctaHref: "/#contact",
+      ctaHref: "/contact",
       image: "/images/service-online.png",
       imageAlt: "Online coaching with Cameron Clark",
       reverse: false,
@@ -203,7 +222,7 @@ export const servicesPage = {
         },
       ],
       cta: "Explore this program",
-      ctaHref: "/#contact",
+      ctaHref: "/contact",
       image: "/images/service-in-person.png",
       imageAlt: "In-person training with Cameron Clark",
       reverse: true,
@@ -275,7 +294,7 @@ export const process = {
       image: "/images/portrait-confident.jpg",
       imageAlt: "Coaching consultation with Cameron",
       cta: "Book a discovery call",
-      ctaHref: "#contact",
+      ctaHref: "/contact",
     },
     {
       index: "02",
@@ -428,7 +447,7 @@ export const aboutPage = {
       "What began as a passion quickly became a purpose: to help high performers rebuild their bodies and their confidence with the same care, strategy, and precision they bring to every other part of life.",
     ],
     cta: "Let's Build Your Plan Together",
-    ctaHref: "/#contact",
+    ctaHref: "/contact",
   },
   beyond: {
     eyebrow: "Life Off the Floor",
@@ -550,6 +569,33 @@ export const finalCta = {
   headingLines: ["Ready to Get Back", "in the Driver's", "Seat?"],
   body: "If you're a medical professional or tech executive who's tired of feeling older than your age, and you're ready to invest in a solution that actually works for your lifestyle, let's talk.",
   cta: "Book a Discovery Call",
+};
+
+export const contactPage = {
+  metaTitle: "Contact",
+  metaDescription:
+    "Contact Cameron Clark Fitness today to start your personalized training journey with expert guidance, proven methods and real results.",
+  eyebrow: "Get in Touch",
+  heading: "Contact Us",
+  body: "Here are the ways you can reach out to us. Our lines are always open for all your inquiries.",
+  form: {
+    nameLabel: "Name",
+    namePlaceholder: "Your full name",
+    emailLabel: "Email",
+    emailPlaceholder: "you@example.com",
+    phoneLabel: "Phone",
+    phonePlaceholder: "(555) 000-0000",
+    subjectLabel: "Subject",
+    subjectPlaceholder: "How can we help?",
+    messageLabel: "Message",
+    messagePlaceholder: "Type your message here",
+    submit: "Submit",
+    submitting: "Sending…",
+    successTitle: "Message sent",
+    successBody:
+      "Thanks for reaching out. Cameron’s team will get back to you shortly.",
+    errorBody: "Something went wrong. Please try again or email us directly.",
+  },
 };
 
 export const footer = {
