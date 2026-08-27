@@ -5,6 +5,7 @@ import Image from "next/image";
 import { hero, site } from "@/lib/content";
 import { Container } from "@/components/layout/container";
 import { useGsap } from "@/hooks/use-gsap";
+import { HeroFigureSequence } from "@/components/sections/hero-figure-sequence";
 import { gsap } from "@/lib/animations/gsap";
 
 /**
@@ -113,6 +114,7 @@ export function Hero() {
     <section
       ref={root}
       id="top"
+      data-hero-scrub
       className="relative h-dvh min-h-[640px] overflow-hidden bg-black"
     >
       {/* Left contact rail — desktop only. */}
@@ -161,6 +163,7 @@ export function Hero() {
           className="pointer-events-none absolute bottom-0 left-1/2 z-10 w-[min(105vw,680px)] -translate-x-1/2 sm:w-[min(92vw,760px)] lg:w-[min(72vw,80vh,1020px)]"
         >
           <Image
+            data-hero-figure-static
             src="/images/hero-figure.webp"
             alt="Cameron Clark, personal fitness coach"
             width={700}
@@ -168,6 +171,11 @@ export function Hero() {
             priority
             unoptimized
             className="h-auto w-full"
+          />
+          {/* Cursor-scrubbed frame sequence — layered over the static image on
+              fine-pointer devices, and fades it out once frames are ready. */}
+          <HeroFigureSequence
+            className="absolute inset-0 h-full w-full"
           />
           <div className="absolute inset-x-0 bottom-0 h-16 bg-linear-to-t from-black to-transparent" />
         </div>
