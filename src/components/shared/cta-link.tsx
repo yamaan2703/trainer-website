@@ -2,6 +2,7 @@
 
 import { useRef, type ReactNode } from "react";
 import { motion, useMotionValue, useReducedMotion, useSpring } from "framer-motion";
+import { AppLink } from "@/components/shared/app-link";
 import { cn } from "@/lib/utils";
 
 interface CtaLinkProps {
@@ -13,6 +14,7 @@ interface CtaLinkProps {
 
 const PULL = 0.35;
 const MAX_OFFSET = 14;
+const MotionAppLink = motion.create(AppLink);
 
 /**
  * A CTA that gently pulls toward the cursor on hover ("magnetic button").
@@ -42,7 +44,7 @@ export function CtaLink({ href, children, variant = "solid", className }: CtaLin
   };
 
   return (
-    <motion.a
+    <MotionAppLink
       ref={ref}
       href={href}
       onMouseMove={handleMouseMove}
@@ -60,6 +62,6 @@ export function CtaLink({ href, children, variant = "solid", className }: CtaLin
       <span aria-hidden className="transition-transform group-hover:translate-x-1">
         →
       </span>
-    </motion.a>
+    </MotionAppLink>
   );
 }

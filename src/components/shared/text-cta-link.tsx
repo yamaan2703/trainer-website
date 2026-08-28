@@ -1,4 +1,5 @@
 import type { AnchorHTMLAttributes, ReactNode } from "react";
+import { AppLink } from "@/components/shared/app-link";
 import { cn } from "@/lib/utils";
 
 interface TextCtaLinkProps extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href" | "children"> {
@@ -20,7 +21,7 @@ export function TextCtaLink({
   ...props
 }: TextCtaLinkProps) {
   return (
-    <a
+    <AppLink
       href={href}
       className={cn(
         "group/link inline-flex w-fit items-center gap-2.5 text-xs uppercase tracking-[0.14em] text-ink sm:text-[0.8125rem]",
@@ -45,6 +46,6 @@ export function TextCtaLink({
       >
         {arrow}
       </span>
-    </a>
+    </AppLink>
   );
 }

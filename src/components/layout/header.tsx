@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { NavOverlay } from "@/components/layout/nav-overlay";
 import { Container } from "@/components/layout/container";
 import { useLenis } from "@/components/providers/smooth-scroll-provider";
+import { AppLink } from "@/components/shared/app-link";
 import { nav, site } from "@/lib/content";
 import { isNavActive } from "@/lib/nav";
 import { cn } from "@/lib/utils";
@@ -58,7 +59,7 @@ export function Header() {
         className="bg-transparent"
       >
         <Container className="flex h-[var(--header-h)] items-center justify-between gap-6 sm:gap-8">
-          <a href="/" className="relative z-10 flex shrink-0 items-center">
+          <AppLink href="/" className="relative z-10 flex shrink-0 items-center">
             <Image
               src="/logo/wordmark-white.png"
               alt="Cameron Clark Fitness"
@@ -68,7 +69,7 @@ export function Header() {
               data-theme-logo
               className="h-6 w-auto sm:h-7"
             />
-          </a>
+          </AppLink>
 
           <div className="relative z-10 flex shrink-0 items-center gap-1 sm:gap-2">
             <nav
@@ -79,7 +80,7 @@ export function Header() {
                 const active = isNavActive({ href: item.href, pathname });
 
                 return (
-                  <a
+                  <AppLink
                     key={item.href}
                     href={item.href}
                     aria-current={active ? "page" : undefined}
@@ -92,17 +93,17 @@ export function Header() {
                     )}
                   >
                     {item.label}
-                  </a>
+                  </AppLink>
                 );
               })}
             </nav>
 
-            <a
+            <AppLink
               href={site.discoveryCallHref}
               className="btn-cta px-3.5 py-2 text-[0.6875rem] sm:px-5 sm:py-2.5 sm:text-xs"
             >
               Discovery Call
-            </a>
+            </AppLink>
 
             <button
               ref={triggerRef}

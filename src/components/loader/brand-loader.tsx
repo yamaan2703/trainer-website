@@ -12,7 +12,6 @@ const EXIT_HOLD_MS = 350;
 /**
  * Full-screen black loader that plays the original Cameron Clark signature
  * animation (SVG renderer) once — no extra draw/clip overlays.
- * Mount with a new `key` to replay on route transitions.
  */
 export function BrandLoaderRun({ onComplete }: { onComplete?: () => void }) {
   const [visible, setVisible] = useState(true);

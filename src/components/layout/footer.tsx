@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { footer, nav, site } from "@/lib/content";
 import { Container } from "@/components/layout/container";
+import { AppLink } from "@/components/shared/app-link";
 
 /**
  * Footer — black panel modelled on the CCTP / SSTR reference grid.
@@ -65,7 +66,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-12">
           {/* Brand column */}
           <div className="flex flex-col justify-between gap-10 px-6 py-12 sm:px-10 md:col-span-4 md:py-14 lg:px-16 lg:py-16">
-            <a href="/" className="inline-flex w-fit items-center">
+            <AppLink href="/" className="inline-flex w-fit items-center">
               <Image
                 src="/logo/wordmark-white.png"
                 alt="Cameron Clark Fitness"
@@ -73,7 +74,7 @@ export function Footer() {
                 height={90}
                 className="h-12 w-auto sm:h-14 lg:h-16"
               />
-            </a>
+            </AppLink>
             <p className="max-w-[18rem] text-sm leading-relaxed text-white/50">
               {footer.tagline}
             </p>
@@ -85,13 +86,13 @@ export function Footer() {
               <FooterHeading>Pages</FooterHeading>
               <nav aria-label="Footer" className="mt-6 flex flex-col gap-3.5">
                 {nav.map((item) => (
-                  <a
+                  <AppLink
                     key={item.href}
                     href={item.href}
                     className="text-sm text-white/80 transition-colors duration-300 hover:text-white"
                   >
                     {item.label}
-                  </a>
+                  </AppLink>
                 ))}
               </nav>
             </div>
@@ -121,12 +122,12 @@ export function Footer() {
               <p className="mt-6 max-w-[16rem] text-sm leading-relaxed text-white/50">
                 Currently accepting new clients for online and in-person coaching.
               </p>
-              <a
+              <AppLink
                 href={site.discoveryCallHref}
                 className="btn-cta mt-5 px-3 py-2 text-sm"
               >
                 Book a Discovery Call →
-              </a>
+              </AppLink>
             </div>
             <div className="flex gap-2.5">
               {site.social.map((item) => {
@@ -159,13 +160,13 @@ export function Footer() {
             className="flex flex-wrap gap-x-4 gap-y-1 sm:justify-end"
           >
             {footer.legal.map((item) => (
-              <a
+              <AppLink
                 key={item.href}
                 href={item.href}
                 className="transition-colors duration-300 hover:text-white"
               >
                 {item.label}
-              </a>
+              </AppLink>
             ))}
           </nav>
         </div>

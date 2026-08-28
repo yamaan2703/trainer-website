@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { faq, site } from "@/lib/content";
 import { Container } from "@/components/layout/container";
+import { AppLink } from "@/components/shared/app-link";
 import { Eyebrow } from "@/components/shared/eyebrow";
 import {
   Accordion,
@@ -90,13 +91,13 @@ export function Faq() {
                 Straight answers on coaching, travel, results, and what comes
                 after the first eight weeks.
               </p>
-              <a
+              <AppLink
                 data-split-meta
                 href={site.discoveryCallHref}
                 className="btn-cta mt-8 w-fit px-5 py-2.5 text-xs sm:mt-10"
               >
                 Discovery Call
-              </a>
+              </AppLink>
             </div>
 
             {/* Right — card accordion */}

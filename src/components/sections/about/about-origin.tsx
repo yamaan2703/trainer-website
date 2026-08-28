@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { aboutPage } from "@/lib/content";
 import { Container } from "@/components/layout/container";
+import { AppLink } from "@/components/shared/app-link";
 import { Eyebrow } from "@/components/shared/eyebrow";
 import { useGsap } from "@/hooks/use-gsap";
 import { gsap } from "@/lib/animations/gsap";
@@ -64,13 +65,13 @@ export function AboutOrigin() {
                   </p>
                 ))}
               </div>
-              <a
+              <AppLink
                 data-split-meta
                 href={aboutPage.origin.ctaHref}
                 className="btn-cta mt-8 w-fit px-5 py-2.5 text-xs sm:mt-10"
               >
                 {aboutPage.origin.cta}
-              </a>
+              </AppLink>
             </div>
           </div>
         </div>

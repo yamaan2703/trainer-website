@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { nav, site } from "@/lib/content";
 import { isNavActive } from "@/lib/nav";
 import { cn } from "@/lib/utils";
+import { AppLink } from "@/components/shared/app-link";
 import { EASE_OUT } from "@/lib/animations/motion-variants";
 
 interface NavOverlayProps {
@@ -97,7 +98,7 @@ export function NavOverlay({ open, onClose }: NavOverlayProps) {
                     >
                       0{i + 1}
                     </span>
-                    <a
+                    <AppLink
                       ref={i === 0 ? firstLinkRef : undefined}
                       href={item.href}
                       onClick={onClose}
@@ -109,7 +110,7 @@ export function NavOverlay({ open, onClose }: NavOverlayProps) {
                       )}
                     >
                       {item.label}
-                    </a>
+                    </AppLink>
                   </motion.div>
                 );
               })}
@@ -138,13 +139,13 @@ export function NavOverlay({ open, onClose }: NavOverlayProps) {
                   {site.phone}
                 </a>
               </div>
-              <a
+              <AppLink
                 href={site.discoveryCallHref}
                 onClick={onClose}
                 className="inline-flex w-fit items-center bg-lime-ink px-5 py-2.5 text-xs font-bold uppercase tracking-[0.12em] text-cream transition-colors duration-300 hover:bg-white hover:text-lime-ink"
               >
                 Discovery Call
-              </a>
+              </AppLink>
             </motion.div>
           </div>
         </motion.div>

@@ -4,6 +4,7 @@ import { useRef, type ReactNode } from "react";
 import Image from "next/image";
 import { hero, site } from "@/lib/content";
 import { Container } from "@/components/layout/container";
+import { AppLink } from "@/components/shared/app-link";
 import { useGsap } from "@/hooks/use-gsap";
 import { HeroFigureSequence } from "@/components/sections/hero-figure-sequence";
 import { gsap } from "@/lib/animations/gsap";
@@ -222,12 +223,12 @@ export function Hero() {
             <p className="hidden text-left text-[0.95rem] leading-relaxed text-ink-muted lg:block">
               {hero.sub}
             </p>
-            <a
+            <AppLink
               href={site.discoveryCallHref}
               className="btn-cta px-5 py-2.5 text-xs sm:px-7 sm:py-3 sm:text-sm"
             >
               {hero.cta}
-            </a>
+            </AppLink>
           </div>
         </div>
       </Container>
