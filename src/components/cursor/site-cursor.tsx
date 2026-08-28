@@ -116,7 +116,7 @@ export function SiteCursor() {
     let visible = false;
 
     function applyState(next: CursorState) {
-      if (next === state) return;
+      if (!root || next === state) return;
       state = next;
       root.dataset.state = next;
 
@@ -175,7 +175,7 @@ export function SiteCursor() {
       yRing(y + my);
 
       applyState(next);
-      root.dataset.accent = accent ? "true" : "false";
+      if (root) root.dataset.accent = accent ? "true" : "false";
       return next;
     }
 
