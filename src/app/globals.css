@@ -202,23 +202,27 @@
   }
 
   /**
-   * Primary CTA — orange in both themes.
-   * Hover tracks --theme-t: dark (0) → white/black, light (1) → black/white.
+   * Primary CTA — orange at rest.
+   * Hover wipes from the left: white on dark theme, black on light,
+   * with matching ink so the fill never disappears into the page.
    */
   .btn-cta {
     @apply inline-flex items-center justify-center bg-orange-600 font-bold uppercase tracking-[0.12em] text-lime-ink;
+    background-image: linear-gradient(
+      color-mix(in oklab, #ffffff, #000000 calc(var(--theme-t) * 100%)),
+      color-mix(in oklab, #ffffff, #000000 calc(var(--theme-t) * 100%))
+    );
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: 0% 100%;
     transition:
-      background-color 0.3s ease,
-      color 0.3s ease;
+      background-size 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+      color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .btn-cta:hover,
   .btn-cta:focus-visible {
-    background-color: color-mix(
-      in oklab,
-      #ffffff,
-      #000000 calc(var(--theme-t) * 100%)
-    );
+    background-size: 100% 100%;
     color: color-mix(
       in oklab,
       #000000,
