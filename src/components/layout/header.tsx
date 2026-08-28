@@ -3,16 +3,12 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { motion } from "framer-motion";
 import { NavOverlay } from "@/components/layout/nav-overlay";
 import { Container } from "@/components/layout/container";
 import { useLenis } from "@/components/providers/smooth-scroll-provider";
 import { AppLink } from "@/components/shared/app-link";
-import { nav, site } from "@/lib/content";
-import { isNavActive } from "@/lib/nav";
-import { cn } from "@/lib/utils";
 
-/** Distance (px) scrolled before the header grows its hairline. */
+/** Inner pages: hairline after this much scroll. Homepage uses the hero instead. */
 const BORDER_THRESHOLD = 8;
 
 export function Header() {
@@ -22,17 +18,29 @@ export function Header() {
   const barRef = useRef<HTMLDivElement>(null);
   const lenis = useLenis();
 
-  // Written straight to a data attribute rather than React state: this runs on
-  // every scroll frame, and re-rendering the header that often would be waste.
+  // Written to data attributes rather than React state: this runs on every
+  // scroll frame, and re-rendering the header that often would be waste.
+  //
+  // Homepage: stay fully transparent while the black hero is still under the
+  // bar. Inner pages: frost after a few pixels.
   //
   // Subscribes to Lenis, NOT to `window`'s scroll event — Lenis swallows the
-  // native event entirely, so a plain listener here never runs. The window
-  // fallback only covers the first frames before Lenis mounts.
+  // native event entirely. The window fallback covers the first frames before
+  // Lenis mounts.
   useEffect(() => {
     const el = barRef.current;
     if (!el) return;
 
     const sync = () => {
+      const hero = document.querySelector<HTMLElement>("[data-hero-scrub]");
+      if (hero) {
+        const stillOverHero = hero.getBoundingClientRect().bottom > 72;
+        el.dataset.overHero = String(stillOverHero);
+        el.dataset.scrolled = String(!stillOverHero);
+        return;
+      }
+
+      el.dataset.overHero = "false";
       el.dataset.scrolled = String(window.scrollY > BORDER_THRESHOLD);
     };
 
@@ -43,7 +51,7 @@ export function Header() {
       return () => window.removeEventListener("scroll", sync);
     }
     return lenis.on("scroll", sync);
-  }, [lenis]);
+  }, [lenis, pathname]);
 
   const close = () => {
     setOpen(false);
@@ -55,11 +63,16 @@ export function Header() {
       <div
         ref={barRef}
         data-header-bar
+        data-over-hero="false"
         data-scrolled="false"
-        className="bg-transparent"
+        data-menu-open={open ? "true" : "false"}
       >
-        <Container className="flex h-[var(--header-h)] items-center justify-between gap-6 sm:gap-8">
-          <AppLink href="/" className="relative z-10 flex shrink-0 items-center">
+        <Container className="flex h-[var(--header-h)] items-center justify-between gap-4">
+          <AppLink
+            href="/"
+            className="flex shrink-0 items-center"
+            onClick={() => setOpen(false)}
+          >
             <Image
               src="/logo/wordmark-white.png"
               alt="Cameron Clark Fitness"
@@ -71,65 +84,22 @@ export function Header() {
             />
           </AppLink>
 
-          <div className="relative z-10 flex shrink-0 items-center gap-1 sm:gap-2">
-            <nav
-              aria-label="Primary"
-              className="mr-1 hidden items-center lg:flex xl:mr-2"
-            >
-              {nav.map((item) => {
-                const active = isNavActive({ href: item.href, pathname });
-
-                return (
-                  <AppLink
-                    key={item.href}
-                    href={item.href}
-                    aria-current={active ? "page" : undefined}
-                    data-active={active ? "true" : undefined}
-                    className={cn(
-                      "px-3 py-1.5 text-[0.8125rem] font-medium tracking-[0.02em] transition-colors hover:bg-ink/10 xl:px-3.5",
-                      active
-                        ? "text-orange-600 hover:text-orange-600"
-                        : "text-ink/80 hover:text-ink"
-                    )}
-                  >
-                    {item.label}
-                  </AppLink>
-                );
-              })}
-            </nav>
-
-            <AppLink
-              href={site.discoveryCallHref}
-              className="btn-cta px-3.5 py-2 text-[0.6875rem] sm:px-5 sm:py-2.5 sm:text-xs"
-            >
-              Discovery Call
-            </AppLink>
-
-            <button
-              ref={triggerRef}
-              type="button"
-              onClick={() => setOpen(true)}
-              aria-haspopup="dialog"
-              aria-expanded={open}
-              className="group ml-1 flex items-center gap-3 text-ink lg:hidden"
-            >
-              <span className="hidden text-xs font-medium uppercase tracking-[0.2em] sm:block">
-                Menu
+          <button
+            ref={triggerRef}
+            type="button"
+            onClick={() => setOpen(true)}
+            aria-label="Open menu"
+            aria-haspopup="dialog"
+            aria-expanded={open}
+            className="site-nav-toggle"
+          >
+            <span aria-hidden className="site-nav-menu">
+              <span className="site-nav-menu-lines">
+                <span />
+                <span />
               </span>
-              <span className="relative flex h-9 w-9 items-center justify-center">
-                <span className="flex flex-col items-end gap-[5px]">
-                  <motion.span
-                    animate={{ width: 22 }}
-                    className="h-[1.5px] w-[22px] bg-ink transition-colors group-hover:bg-orange-600"
-                  />
-                  <motion.span
-                    animate={{ width: 14 }}
-                    className="h-[1.5px] bg-ink transition-colors group-hover:w-[22px] group-hover:bg-orange-600"
-                  />
-                </span>
-              </span>
-            </button>
-          </div>
+            </span>
+          </button>
         </Container>
       </div>
 

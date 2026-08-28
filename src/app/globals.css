@@ -272,16 +272,171 @@ html.lenis body {
 [data-header-bar] {
   border-bottom: 1px solid transparent;
   background-color: transparent;
+  backdrop-filter: none;
   transition:
-    border-color 300ms cubic-bezier(0.65, 0, 0.35, 1),
-    background-color 300ms cubic-bezier(0.65, 0, 0.35, 1),
-    backdrop-filter 300ms cubic-bezier(0.65, 0, 0.35, 1);
+    border-color 360ms cubic-bezier(0.65, 0, 0.35, 1),
+    background-color 360ms cubic-bezier(0.65, 0, 0.35, 1),
+    backdrop-filter 360ms cubic-bezier(0.65, 0, 0.35, 1);
 }
 
 [data-header-bar][data-scrolled="true"] {
   border-bottom-color: var(--hairline);
-  background-color: color-mix(in oklab, var(--surface) 70%, transparent);
-  backdrop-filter: blur(12px);
+  background-color: color-mix(in oklab, var(--surface) 78%, transparent);
+  backdrop-filter: blur(18px) saturate(140%);
+}
+
+/* Frost only after the black hero is gone — never over the figure. */
+[data-header-bar][data-over-hero="true"] {
+  border-bottom-color: transparent;
+  background-color: transparent;
+  backdrop-filter: none;
+}
+
+.site-nav-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--ink);
+  transition: color 280ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.site-nav-toggle:hover {
+  color: var(--color-orange-600, var(--copper));
+}
+
+.site-nav-menu {
+  display: flex;
+  height: 2.5rem;
+  width: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid color-mix(in oklab, currentColor 28%, transparent);
+  transition: border-color 280ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.site-nav-toggle:hover .site-nav-menu {
+  border-color: var(--color-orange-600, var(--copper));
+}
+
+.site-nav-menu-lines {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+}
+
+.site-nav-menu-lines span {
+  display: block;
+  height: 1.5px;
+  background: currentColor;
+  transition: width 280ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.site-nav-menu-lines span:first-child {
+  width: 14px;
+}
+
+.site-nav-menu-lines span:last-child {
+  width: 9px;
+}
+
+.site-nav-toggle:hover .site-nav-menu-lines span {
+  width: 14px;
+}
+
+.site-nav-close-mark {
+  position: relative;
+  display: block;
+  height: 14px;
+  width: 14px;
+}
+
+.site-nav-close-mark::before,
+.site-nav-close-mark::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  height: 1.5px;
+  width: 14px;
+  background: currentColor;
+}
+
+.site-nav-close-mark::before {
+  transform: rotate(45deg);
+}
+
+.site-nav-close-mark::after {
+  transform: rotate(-45deg);
+}
+
+.site-nav-toggle-on-dark {
+  color: #fff;
+}
+
+.site-menu-panel {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.site-menu-panel::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.site-menu-item {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  border-bottom: 1px solid color-mix(in oklab, #fff 12%, transparent);
+  padding-block: 0.7rem;
+}
+
+@media (min-width: 640px) {
+  .site-menu-item {
+    gap: 1.5rem;
+    padding-block: 0.85rem;
+  }
+}
+
+.site-menu-link {
+  display: inline-block;
+  font-size: clamp(2.4rem, 11vw, 5.25rem);
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.site-menu-link-label {
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+
+.site-menu-link-label span {
+  display: block;
+  transition: transform 600ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.site-menu-link-label span:last-child {
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--color-orange-600, var(--copper));
+  transform: translateY(110%);
+}
+
+.site-menu-link:hover .site-menu-link-label span:first-child,
+.site-menu-link.is-active .site-menu-link-label span:first-child {
+  transform: translateY(-110%);
+}
+
+.site-menu-link:hover .site-menu-link-label span:last-child,
+.site-menu-link.is-active .site-menu-link-label span:last-child {
+  transform: translateY(0);
 }
 
 /* Timeline pinned chapters own the full viewport — tuck the fixed nav away

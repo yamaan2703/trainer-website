@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { footer, nav, site } from "@/lib/content";
+import { footer, footerNav, site } from "@/lib/content";
 import { Container } from "@/components/layout/container";
 import { AppLink } from "@/components/shared/app-link";
 
@@ -85,7 +85,7 @@ export function Footer() {
             <div>
               <FooterHeading>Pages</FooterHeading>
               <nav aria-label="Footer" className="mt-6 flex flex-col gap-3.5">
-                {nav.map((item) => (
+                {footerNav.map((item) => (
                   <AppLink
                     key={item.href}
                     href={item.href}

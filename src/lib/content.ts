@@ -49,11 +49,15 @@ export const site = {
   ],
 };
 
-/** Desktop/horizontal nav — labels mirror the reference hero composition. */
+/** Primary pages — opened from the full-screen menu. */
 export const nav = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Services", href: "/service" },
+];
+
+export const footerNav = [
+  ...nav,
   { label: "Contact", href: "/contact" },
 ];
 
