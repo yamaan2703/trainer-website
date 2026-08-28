@@ -7,6 +7,7 @@ import { Container } from "@/components/layout/container";
 import { AppLink } from "@/components/shared/app-link";
 import { useGsap } from "@/hooks/use-gsap";
 import { HeroFigureSequence } from "@/components/sections/hero-figure-sequence";
+import { HeroAtmosphere } from "@/components/sections/hero-atmosphere";
 import { gsap } from "@/lib/animations/gsap";
 
 /**
@@ -118,6 +119,8 @@ export function Hero() {
       data-hero-scrub
       className="relative h-dvh min-h-[640px] overflow-hidden bg-black"
     >
+      <HeroAtmosphere />
+
       {/* Left contact rail — desktop only. */}
       <div
         data-hero-fade
@@ -145,7 +148,7 @@ export function Hero() {
 
       <Container className="relative flex h-full flex-col pt-(--header-h)">
         {/* Headline — sits BEHIND the figure. */}
-        <h1 className="relative z-0 mx-auto max-w-[18ch] pt-4 text-center text-[clamp(2.75rem,11.2vw,7.5rem)] font-medium leading-[1.02] tracking-[-0.035em] sm:pt-6 lg:max-w-none">
+        <h1 className="relative z-[1] mx-auto max-w-[18ch] pt-4 text-center text-[clamp(2.75rem,11.2vw,7.5rem)] font-medium leading-[1.02] tracking-[-0.035em] sm:pt-6 lg:max-w-none">
           <span data-hero-line className="block overflow-hidden">
             <span className="block bg-linear-to-b from-white to-white/45 bg-clip-text text-transparent">
               {hero.headlineLine1}
