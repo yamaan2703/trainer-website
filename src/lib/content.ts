@@ -511,8 +511,8 @@ export const aboutPage = {
   hero: {
     eyebrow: "About",
     heading: "Meet Cameron Clark",
-    image: "/images/deadlift.png",
-    imageAlt: "Cameron Clark powerlifting at a national championship",
+    image: "/images/about-page.png",
+    imageAlt: "Cameron Clark at the gym, arms crossed",
   },
   origin: {
     eyebrow: "Origin",

@@ -57,7 +57,7 @@ export function AboutBeyond() {
     >
       <Container>
         <div className="border-t border-hairline pt-12 lg:pt-16">
-          <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12 lg:gap-x-14">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-stretch lg:gap-x-14">
             <div data-beyond-header className="lg:col-span-5">
               <div data-split-meta>
                 <Eyebrow className="text-ink-muted">
@@ -81,18 +81,6 @@ export function AboutBeyond() {
                   </p>
                 ))}
               </div>
-            </div>
-
-            <div className="lg:col-span-6 lg:col-start-7">
-              <div className="relative aspect-[4/5] w-full overflow-hidden bg-surface-2 sm:aspect-[3/4]">
-                <Image
-                  src={aboutPage.beyond.image}
-                  alt={aboutPage.beyond.imageAlt}
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 42vw"
-                  className="object-cover object-center"
-                />
-              </div>
 
               <div className="mt-10 space-y-0 border-t border-hairline">
                 {aboutPage.beyond.audiences.map((item, i) => (
@@ -112,6 +100,18 @@ export function AboutBeyond() {
                     </p>
                   </div>
                 ))}
+              </div>
+            </div>
+
+            <div className="lg:col-span-6 lg:col-start-7">
+              <div className="relative aspect-[4/5] h-full min-h-[24rem] w-full overflow-hidden bg-surface-2 sm:aspect-[3/4] lg:aspect-auto lg:min-h-0">
+                <Image
+                  src={aboutPage.beyond.image}
+                  alt={aboutPage.beyond.imageAlt}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 42vw"
+                  className="object-cover object-top"
+                />
               </div>
             </div>
           </div>

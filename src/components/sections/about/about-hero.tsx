@@ -54,7 +54,7 @@ export function AboutHero() {
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 48vw"
-                className="object-cover object-center"
+                className="object-cover object-top"
               />
             </div>
           </div>
