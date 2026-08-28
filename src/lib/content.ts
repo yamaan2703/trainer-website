@@ -175,12 +175,12 @@ export const services = [
   },
 ];
 
-/** Full Services page copy — from cameronclarkfitness.com/service. */
+/** Full Services page copy — original program layout, five offerings with images. */
 export const servicesPage = {
   hero: {
     eyebrow: "Services",
     headingLines: ["Programs That", "Fit Your Life"],
-    body: "Whether you need a full rebuild or a quick tune-up, Cameron Clark offers two coaching programs built around your goals, schedule, and lifestyle.",
+    body: "Whether you need a full rebuild or a long-term partnership, Cameron’s coaching covers training, nutrition, recovery, and in-person work — built around your goals, schedule, and lifestyle.",
   },
   programs: [
     {
@@ -203,7 +203,7 @@ export const servicesPage = {
       ],
       cta: "Dive Deeper",
       ctaHref: "/contact",
-      image: "/images/service-online.png",
+      image: "/images/service-1.png",
       imageAlt: "Online coaching with Cameron Clark",
       reverse: false,
     },
@@ -227,9 +227,81 @@ export const servicesPage = {
       ],
       cta: "Explore this program",
       ctaHref: "/contact",
-      image: "/images/service-in-person.png",
+      image: "/images/service-2.png",
       imageAlt: "In-person training with Cameron Clark",
       reverse: true,
+    },
+    {
+      id: "nutrition",
+      index: "03",
+      eyebrow: "Nutrition",
+      heading: "Strategy That Survives Real Life",
+      body: "Nutrition built around travel, client dinners, and irregular hours — not a meal plan that collapses the first week you’re on the road.",
+      features: [
+        {
+          title: "Real-world Demands",
+          description:
+            "Strategies that hold up to travel, client dinners, and irregular hours.",
+        },
+        {
+          title: "Sustainable Fueling",
+          description:
+            "Adjustments as life shifts — not a rigid plan that fails the first week you’re away.",
+        },
+      ],
+      cta: "Talk nutrition",
+      ctaHref: "/contact",
+      image: "/images/momentum-4.png",
+      imageAlt: "Training and nutrition plan laid out for long-term results",
+      reverse: false,
+    },
+    {
+      id: "recovery",
+      index: "04",
+      eyebrow: "Recovery",
+      heading: "Systems for Sleep and Energy",
+      body: "Recovery designed for professional reality — so afternoon crashes stop, sleep improves, and you still have something left after the workday.",
+      features: [
+        {
+          title: "Sleep Support",
+          description:
+            "Recovery built so afternoon crashes stop and sleep actually improves.",
+        },
+        {
+          title: "Sustainable Output",
+          description:
+            "Systems for professional reality, so you still have energy left after the workday.",
+        },
+      ],
+      cta: "Rebuild your recovery",
+      ctaHref: "/contact",
+      image: "/images/momentum-1.png",
+      imageAlt: "Cameron Clark coaching a client through a split squat",
+      reverse: true,
+    },
+    {
+      id: "partnership",
+      index: "05",
+      eyebrow: "Long-term",
+      heading: "Ongoing Performance Partnership",
+      body: "After the eight-week reset, most clients stay on for monthly tuning, quarterly reviews, and priority access — so the gains hold through travel and deadlines.",
+      features: [
+        {
+          title: "Ongoing Tuning",
+          description:
+            "Continuous evolution as your life changes, with monthly support after the first eight weeks.",
+        },
+        {
+          title: "Quarterly Reviews & Priority Access",
+          description:
+            "Long-term health and energy maintenance, with priority access to Cameron.",
+        },
+      ],
+      cta: "Continue your progress",
+      ctaHref: "/contact",
+      image: "/images/service-3.png",
+      imageAlt: "Ongoing coaching partnership with Cameron Clark",
+      reverse: false,
     },
   ],
   cta: {

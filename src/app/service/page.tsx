@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
 import { servicesPage } from "@/lib/content";
 import { ServicesHero } from "@/components/sections/services-page/services-hero";
-import { ServicesProgram } from "@/components/sections/services-page/services-program";
+import { ServicesIndex } from "@/components/sections/services-page/services-index";
 import { FinalCta } from "@/components/sections/final-cta";
 
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Programs that fit your life — Elevated Professional online coaching and tailored in-person training with Cameron Clark.",
+    "Online coaching, in-person training in Dallas and the Bay Area, nutrition, recovery, and long-term partnership with Cameron Clark.",
   openGraph: {
     title: "Services | Cameron Clark Fitness",
     description:
-      "Programs that fit your life — Elevated Professional online coaching and tailored in-person training with Cameron Clark.",
+      "Online coaching, in-person training in Dallas and the Bay Area, nutrition, recovery, and long-term partnership with Cameron Clark.",
     url: "/service",
   },
 };
@@ -20,9 +20,7 @@ export default function ServicePage() {
   return (
     <>
       <ServicesHero />
-      {servicesPage.programs.map((program) => (
-        <ServicesProgram key={program.id} program={program} />
-      ))}
+      <ServicesIndex />
       <FinalCta content={servicesPage.cta} />
     </>
   );
