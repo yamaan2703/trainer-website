@@ -120,7 +120,7 @@ export const services = [
     stat: "$1,500",
     statLabel: "8-week reset",
     cta: "Explore the program",
-    image: "/images/service-online.png",
+    image: "/images/service-1.png",
   },
   {
     index: "2",
@@ -144,7 +144,7 @@ export const services = [
     stat: "20 yrs",
     statLabel: "specialized expertise",
     cta: "Explore the program",
-    image: "/images/service-in-person.png",
+    image: "/images/service-2.png",
   },
   {
     index: "3",
@@ -167,7 +167,7 @@ export const services = [
     stat: "$500",
     statLabel: "per month",
     cta: "Continue your progress",
-    image: "/images/deadlift.png",
+    image: "/images/service-3.png",
   },
 ];
 
@@ -259,23 +259,23 @@ export const outcomes = {
   items: [
     {
       text: "Waking up without wondering what's going to hurt today",
-      image: "/images/portrait-confident.jpg",
-      alt: "Cameron Clark looking confident and recovered",
+      image: "/images/momentum-1.png",
+      alt: "Cameron Clark coaching a client through a split squat",
     },
     {
       text: "Having energy left for family time after long work days",
-      image: "/images/story-daughter.jpg",
-      alt: "Cameron Clark with his daughter",
+      image: "/images/momentum-2.png",
+      alt: "Cameron Clark standing with a coaching client",
     },
     {
       text: "Confidence in their physical capabilities again",
-      image: "/images/hero-physique.png",
+      image: "/images/momentum-3.png",
       alt: "Cameron Clark training with focused strength",
     },
     {
       text: "A sustainable system they can maintain long-term",
-      image: "/images/service-in-person.png",
-      alt: "In-person coaching session with Cameron",
+      image: "/images/momentum-4.png",
+      alt: "Training and nutrition plan laid out for long-term results",
     },
   ],
 };
@@ -291,7 +291,7 @@ export const process = {
       title: "Discovery Call",
       description:
         "We start with a focused conversation to understand your goals and current situation, and see the right program for you.",
-      image: "/images/portrait-confident.jpg",
+      image: "/images/track-1.png",
       imageAlt: "Coaching consultation with Cameron",
       cta: "Book a discovery call",
       ctaHref: "/contact",
@@ -301,7 +301,7 @@ export const process = {
       title: "Strategic Onboarding",
       description:
         "You'll complete a health and lifestyle assessment so we can design a tailored program ready to launch within 48 hours.",
-      image: "/images/service-online.png",
+      image: "/images/track-2.png",
       imageAlt: "Program setup and lifestyle assessment",
       cta: "See how onboarding works",
       ctaHref: "#process",
@@ -311,8 +311,8 @@ export const process = {
       title: "Execute & Optimize",
       description:
         "Begin training with direct support, weekly check-ins, and ongoing adjustments to keep your progress on track.",
-      image: "/images/deadlift.png",
-      imageAlt: "Training session with ongoing support",
+      image: "/images/track-3.png",
+      imageAlt: "Weekly check-in and progress tracking with Cameron",
       cta: "View client results",
       ctaHref: "#results",
     },
@@ -1016,7 +1016,7 @@ export const timeline = {
       title: "Sleep Improves",
       script: "afternoon crashes disappear",
       body: "The first thing to come back is your energy. Deeper sleep, steadier mornings, and no more 3 PM wall to push through.",
-      image: "/images/timeline-01.png",
+      image: "/images/slider-1.png",
     },
     {
       id: "weeks-4-6",
@@ -1024,7 +1024,7 @@ export const timeline = {
       title: "Strength Returns",
       script: "and confidence with it",
       body: "Load goes up, movement gets cleaner, and you start trusting your body again under real weight and real fatigue.",
-      image: "/images/timeline-02.jpg",
+      image: "/images/slider-2.png",
     },
     {
       id: "week-8",
@@ -1032,7 +1032,7 @@ export const timeline = {
       title: "You Feel Yourself",
       script: "sharp, energized, unstoppable",
       body: "The full reset. Not a peak you have to defend, but a baseline you can hold through travel, deadlines and everything after.",
-      image: "/images/timeline-03.jpg",
+      image: "/images/slider-3.png",
     },
   ],
 };
