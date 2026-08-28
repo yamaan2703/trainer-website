@@ -25,10 +25,15 @@ function buildMailto({ name, email, phone, subject, message }: ContactFormValues
   return `${site.emailHref.split("?")[0]}?${params.toString()}`;
 }
 
+interface ContactFormProps {
+  /** Hide the form’s own heading when a parent section already supplies one. */
+  compact?: boolean;
+}
+
 /**
  * Contact form — transparent shell on the page surface, soft hairline fields.
  */
-export function ContactForm() {
+export function ContactForm({ compact = false }: ContactFormProps) {
   const prefersReducedMotion = useReducedMotion();
   const [status, setStatus] = useState<FormStatus>("idle");
 
@@ -97,18 +102,21 @@ export function ContactForm() {
       transition={{ duration: 0.7, ease: EASE_OUT, delay: 0.1 }}
       className="bg-transparent py-2 sm:py-4"
       aria-busy={status === "submitting"}
+      aria-label={compact ? "Send a message" : undefined}
     >
-      <header className="mb-8 border-b border-hairline pb-6 sm:mb-9">
-        <p className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-orange-600">
-          Discovery Call
-        </p>
-        <h2 className="mt-2 text-[1.35rem] font-black uppercase leading-tight tracking-tight text-ink sm:text-2xl">
-          Send a message
-        </h2>
-        <p className="mt-2 max-w-sm text-sm leading-relaxed text-ink-muted">
-          Tell us a little about your goals — we&apos;ll follow up personally.
-        </p>
-      </header>
+      {compact ? null : (
+        <header className="mb-8 border-b border-hairline pb-6 sm:mb-9">
+          <p className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-orange-600">
+            Discovery Call
+          </p>
+          <h2 className="mt-2 text-[1.35rem] font-black uppercase leading-tight tracking-tight text-ink sm:text-2xl">
+            Send a message
+          </h2>
+          <p className="mt-2 max-w-sm text-sm leading-relaxed text-ink-muted">
+            Tell us a little about your goals — we&apos;ll follow up personally.
+          </p>
+        </header>
+      )}
 
       <div className="grid grid-cols-1 gap-3.5 sm:gap-4">
         <FieldShell
