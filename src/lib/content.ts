@@ -304,6 +304,40 @@ export const servicesPage = {
       reverse: false,
     },
   ],
+  spotlight: {
+    headingBefore: "Tailored",
+    headingAccent: "In-Person",
+    headingAfter: "Training",
+    body: "Hands-on coaching for professionals who want real-time adjustments and efficient sessions that fit a demanding schedule.",
+    features: [
+      {
+        title: "Hands-on Precision",
+        description:
+          "Expert feedback to fine-tune form and maximize results every session.",
+      },
+      {
+        title: "Custom Workouts that Fit Your Life",
+        description:
+          "Plans designed for your goals and needs, no cookie-cutter templates.",
+      },
+    ],
+    cta: "Explore this program",
+    ctaHref: "/contact",
+    image: "/images/service-pg.png",
+    imageAlt:
+      "Cameron Clark coaching in person — spotting clients through overhead press and bench work",
+  },
+  peak: {
+    headingBefore: "Experience What",
+    headingAccent: "Peak Performance",
+    headingAfter: "Feels Like Again",
+    body: "You don't need to trade yourself in, you need the right mechanic. Cameron's programs are efficient, precise, and built to keep you driving forward stronger than before.",
+    cta: "Book a Discovery Call",
+    ctaHref: "/contact",
+    image: "/images/car-image.png",
+    imageAlt:
+      "Cameron Clark leaning against a classic sports car in a forest clearing",
+  },
   cta: {
     heading: "Experience What Peak Performance Feels Like Again",
     headingLines: [

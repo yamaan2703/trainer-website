@@ -209,7 +209,7 @@ export function NavOverlay({ open, onClose }: NavOverlayProps) {
                   duration: 0.5,
                   ease: EASE_OUT,
                 }}
-                className="mt-10 flex flex-col gap-8 border-t border-white/12 pt-8 sm:mt-12 sm:flex-row sm:items-end sm:justify-between"
+                className="mt-10 flex flex-col gap-8 pt-2 sm:mt-12 sm:flex-row sm:items-end sm:justify-between"
               >
                 <div>
                   <p className="text-[0.65rem] uppercase tracking-[0.22em] text-white/45">

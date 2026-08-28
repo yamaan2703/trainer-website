@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { servicesPage } from "@/lib/content";
 import { ServicesHero } from "@/components/sections/services-page/services-hero";
 import { ServicesIndex } from "@/components/sections/services-page/services-index";
-import { FinalCta } from "@/components/sections/final-cta";
+import { ServicesSpotlight } from "@/components/sections/services-page/services-spotlight";
+import { ServicesPeak } from "@/components/sections/services-page/services-peak";
 
 export const metadata: Metadata = {
   title: "Services",
@@ -21,7 +22,8 @@ export default function ServicePage() {
     <>
       <ServicesHero />
       <ServicesIndex />
-      <FinalCta content={servicesPage.cta} />
+      <ServicesSpotlight />
+      <ServicesPeak />
     </>
   );
 }

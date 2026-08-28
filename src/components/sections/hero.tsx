@@ -222,7 +222,7 @@ export function Hero() {
             </p>
           </div>
 
-          <div className="flex max-w-[260px] flex-col items-center gap-5 sm:items-end xl:max-w-[280px]">
+          <div className="flex max-w-[260px] flex-col items-center gap-5 sm:items-start xl:max-w-[280px]">
             <p className="hidden text-left text-[0.95rem] leading-relaxed text-ink-muted lg:block">
               {hero.sub}
             </p>
